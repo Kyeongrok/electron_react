@@ -1,0 +1,9 @@
+spec
+electron app win32-x64에서 실행 하면
+1.server가 뜨도록 할 것
+- server가 떴는지 어떻게 확인하지?
+
+server에서 http request를 날린다.
+
+
+
