@@ -30,9 +30,11 @@ app.get('/about', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/hello', (req, res) => {
+    res.send('Hello World!');
+});
+
 app.get('/aprskin', (req, res) => {
-
-
     let cafe24 = "https://datahub.cafe24.com/openapi/shop/order/v1/search?service_type=aprilskinkor&mall_id=onesper&data_type=json&auth_code=995ff59dd187520a69b3a89cc2e71e28";
     https.get(cafe24, (res) => {
         console.log('statusCode:', res.statusCode);
@@ -46,7 +48,5 @@ app.get('/aprskin', (req, res) => {
         console.error(e);
     });
 });
-
-
 
 module.exports = app;

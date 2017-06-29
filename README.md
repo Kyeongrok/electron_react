@@ -1,6 +1,6 @@
-#bootstrap create-react-app and electron
+#설계
 
-Code repo for post on freeCodeCamp.
+날짜 시간 입력하면 결과값을 table형태로 return
 
 https://medium.freecodecamp.com/building-an-electron-application-with-create-react-app-97945861647c#.ze6c9qin1
 
