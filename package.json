@@ -28,6 +28,6 @@
     "electron": "electron .",
     "dev": "nf start -p 3000",
     "server": "node server",
-    "electron_build": "electron-packager . --overwrite"
+    "electron_build": "react-scripts build && electron-packager . --overwrite"
   }
 }
