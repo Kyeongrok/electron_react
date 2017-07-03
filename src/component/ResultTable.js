@@ -3,16 +3,16 @@ import {Table, Row, Col} from 'react-bootstrap';
 
 class ResultTable extends Component {
     render(){
-        console.log(this.props.data);
-        let list = [
-            {"name":"hello"}
-        ];
-
+        console.log(this.props.data['result']);
         let list2 = [
-            <TrRow />,
-            <TrRow />
+
         ]
 
+        // for(let element of this.props.data['result']){
+        //     console.log(element);
+        //     list2.push(<TrRow key={element.order_no} row={element} />)
+        // }
+        //
         return (
             <Row className="show-grid">
                 <Col xs={12} md={12}>
@@ -33,10 +33,10 @@ class ResultTable extends Component {
                                 <td>Thornton</td>
                                 <td>@fat</td>
                             </tr>
-                            {list.forEach(function(element) {
-                                return <TrRow row={element}/>
-                            })}
+
                             {list2}
+
+
                         </tbody>
                     </Table>
                 </Col>
