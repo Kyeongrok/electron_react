@@ -8,6 +8,7 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 const https = require('https');
+const cafe24 = require('./cafe24.js');
 
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
@@ -35,18 +36,24 @@ app.get('/hello', (req, res) => {
 });
 
 app.get('/aprskin', (req, res) => {
-    let cafe24 = "https://datahub.cafe24.com/openapi/shop/order/v1/search?service_type=aprilskinkor&mall_id=onesper&data_type=json&auth_code=995ff59dd187520a69b3a89cc2e71e28";
-    https.get(cafe24, (res) => {
-        console.log('statusCode:', res.statusCode);
-        console.log('headers:', res.headers);
+    //let startDatetime = res['query']['start_datetime'];
+    console.log(req.query.start_datetime);
+    let param = {
+        "service_type":"aprilskinkor"
+        ,"mall_id":"onesper"
+        ,"data_type":"json"
+        ,"auth_code":"995ff59dd187520a69b3a89cc2e71e28"
+        ,"start_datetime":"2017-07-01 11:00:00"
+        ,"end_datetime":"2017-07-01 13:00:00"
+    }
 
-        res.on('data', (d) => {
-            process.stdout.write(d);
-        });
-
-    }).on('error', (e) => {
-        console.error(e);
-    });
+    cafe24.printHttpResponse(
+        "https://datahub.cafe24.com/openapi/shop/order/v1/search",
+        param,(body)=>{
+            //console.log(body);
+            res.send(body);
+        }
+    );
 });
 
 module.exports = app;

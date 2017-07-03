@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Table, Grid, Row, Col, FormControl} from 'react-bootstrap';
+import {Button, Grid, Row, Col, FormControl} from 'react-bootstrap';
+import ResultTable from './component/ResultTable';
 import axios from 'axios';
 
 class App extends Component {
@@ -7,26 +8,30 @@ class App extends Component {
         super();
         this.state = {
             message: "nothing",
+            startDateTime:"2017-07-03 12:00:00",
+            resultData:[]
         };
     }
 
     componentWillMount() {
-        //alert("componentWillMount");
+        this.ajaxCall();
     }
+
     render() {
+        console.log(this.state.resultData);
         return (
             <div className="App">
                 <Grid>
                     <Row className="show-grid">
-                        <Col xs={6} md={4}>
+                        <Col xs={5} md={4}>
                             <FormControl
-                            type="text"
-                            value={""}
-                            placeholder="시작날짜"
-                            onChange={this.handleChange}
+                                type="text"
+                                value={""}
+                                placeholder="시작날짜"
+                                onChange={this.handleChange}
                             />
                         </Col>
-                        <Col xs={6} md={4}>
+                        <Col xs={5} md={4}>
                             <FormControl
                                 type="text"
                                 value={""}
@@ -34,57 +39,29 @@ class App extends Component {
                                 onChange={this.handleChange}
                             />
                         </Col>
+                        <Col xs={2} md={4}>
+                            <Button bsStyle="primary" onClick={() => this.handleClickHelloButton()}>조회</Button>
+                        </Col>
                     </Row>
+                    <ResultTable data={this.state.resultData} />
                 </Grid>
-                <p className="App-intro">
-
-                </p>
-                <div>message : {this.state.message}</div>
-                <Table striped bordered condensed hover>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    </tbody>
-                </Table>
-
-                <Button bsStyle="primary" onClick={() => this.handleClickHelloButton()}>Primary</Button>
-                <Button bsStyle="primary" onClick={() => this.handleClickByeButton()}>bye</Button>
             </div>
         );
     }
-
     handleClickHelloButton() {
-        axios.get("http://localhost:9000/hello").then((response) => {
-            console.log(response['data']);
-            this.setState({"message": response['data']});
-        });
+        this.ajaxCall();
     }
-
-    handleClickByeButton() {
-        axios.get("http://localhost:9000/bye").then(response => {
-            console.log(response['data']);
-            this.setState({"message": response['data']});
-        });
+    ajaxCall(){
+        axios.get("http://localhost:9000/aprskin", {
+            params:{
+                "start_datetime":this.state['startDateTime']
+            }
+        })
+            .then((response) => {
+                console.log(response['data']['response']);
+                this.setState({"resultData": response['data']['response']});
+            });
     }
-
 }
 
 export default App;
