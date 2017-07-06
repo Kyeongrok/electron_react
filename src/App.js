@@ -57,10 +57,14 @@ class App extends Component {
                 "start_datetime":this.state['startDateTime']
             }
         })
-            .then((response) => {
-                console.log(response['data']['response']);
-                this.setState({"resultData": response['data']['response']});
-            });
+        .then((response) => {
+            let list = [];
+            let ar = response['data']['response']['result'];
+            for(let item of ar){
+                list.push(item);
+            }
+            this.setState({"resultData": list});
+        });
     }
 }
 

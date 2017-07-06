@@ -3,40 +3,29 @@ import {Table, Row, Col} from 'react-bootstrap';
 
 class ResultTable extends Component {
     render(){
-        console.log(this.props.data['result']);
+        console.log(this.props.data);
         let list2 = [
-
         ]
 
-        // for(let element of this.props.data['result']){
-        //     console.log(element);
-        //     list2.push(<TrRow key={element.order_no} row={element} />)
-        // }
-        //
+        let result = this.props.data;
+        for(let element of result){
+            list2.push(<TrRow key={element.order_no} row={element} />)
+        }
         return (
             <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <Table striped bordered condensed hover>
                         <thead>
                         <tr>
-                            <th>id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>account_no</th>
+                            <th>account_sender</th>
+                            <th>address1</th>
+                            <th>address2</th>
                             <th>Username</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-
                             {list2}
-
-
                         </tbody>
                     </Table>
                 </Col>
@@ -50,9 +39,10 @@ class TrRow extends Component {
         console.log(this.props.row);
         return(
             <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
+                <td>{this.props.row['order_no']}</td>
+                <td>{this.props.row['account_sender']}</td>
+                <td>{this.props.row['ship_address1']}</td>
+                <td>{this.props.row['ship_address2']}</td>
                 <td>@mdo</td>
             </tr>
         )
