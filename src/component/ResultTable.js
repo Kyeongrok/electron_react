@@ -8,6 +8,7 @@ class ResultTable extends Component {
         ]
 
         let result = this.props.data;
+        console.log(result.length);
         for(let element of result){
             list2.push(<TrRow key={element.order_no} row={element} />)
         }
@@ -17,12 +18,15 @@ class ResultTable extends Component {
                     <Table striped bordered condensed hover>
                         <thead>
                         <tr>
-                            <th>account_no</th>
+                            <th>order_no</th>
                             <th>account_sender</th>
                             <th>address1</th>
                             <th>address2</th>
-                            <th>Username</th>
+                            <th>주문개수</th>
+                            <th>product_code</th>
+                            <th>단품인지set인지23</th>
                         </tr>
+
                         </thead>
                         <tbody>
                             {list2}
@@ -43,7 +47,10 @@ class TrRow extends Component {
                 <td>{this.props.row['account_sender']}</td>
                 <td>{this.props.row['ship_address1']}</td>
                 <td>{this.props.row['ship_address2']}</td>
-                <td>@mdo</td>
+                <td>{this.props.row['product'].length}</td>
+                <td>{this.props.row['product'][0]['product_code']}</td>
+                <td>{"set"}</td>
+
             </tr>
         )
     }

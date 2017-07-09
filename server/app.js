@@ -54,6 +54,14 @@ app.get('/aprskin', (req, res) => {
             res.send(body);
         }
     );
+
+
+});
+
+
+app.get('/aprskin', (req, res) => {
+    //product은 아래 주소에서 호출함
+    //https://datahub.cafe24.com/openapi/shop/product/v1/search
 });
 
 module.exports = app;

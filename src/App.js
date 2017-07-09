@@ -61,7 +61,9 @@ class App extends Component {
             let list = [];
             let ar = response['data']['response']['result'];
             for(let item of ar){
-                list.push(item);
+                for(let productItem of item['product']){
+                    list.push(item);
+                }
             }
             this.setState({"resultData": list});
         });
