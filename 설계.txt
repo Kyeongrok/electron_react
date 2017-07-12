@@ -33,6 +33,10 @@ SET에 옵션이 있는거다.
 
 P00000JS 000J인 경우는 23064, 23070이 FIX가 된다.
 
+routing
+index는 react로 한다.
+index.html -> react -> componentWillMount -> axios -> index.php(code igniter)
+host/gateway/product_info.php
 
 
 

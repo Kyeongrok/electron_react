@@ -43,8 +43,8 @@ app.get('/aprskin', (req, res) => {
         ,"mall_id":"onesper"
         ,"data_type":"json"
         ,"auth_code":"995ff59dd187520a69b3a89cc2e71e28"
-        ,"start_datetime":"2017-07-01 11:00:00"
-        ,"end_datetime":"2017-07-01 13:00:00"
+        ,"start_datetime":"2017-07-11 15:34:00"
+        ,"end_datetime":"2017-07-11 15:36:00"
     }
 
     cafe24.printHttpResponse(
