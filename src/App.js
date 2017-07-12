@@ -6,15 +6,34 @@ import axios from 'axios';
 class App extends Component {
     constructor() {
         super();
+        let d = new Date();
+        let yymmdd =
+            d.getFullYear() + "-" +
+            ("00" + (d.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + d.getDate()).slice(-2) + " " +
+            ("00" + d.getHours()).slice(-2) + ":" +
+            ("00" + d.getMinutes()).slice(-2) + ":" +
+            ("00" + d.getSeconds()).slice(-2)
+        ;
+
+        console.log(yymmdd);
+
         this.state = {
             message: "nothing",
             startDateTime:"2017-07-03 12:00:00",
+            endDateTime:"2017-07-03 12:30:00",
             resultData:[]
         };
     }
 
     componentWillMount() {
         this.ajaxCall();
+    }
+    handleChangeStartDatetime(event) {
+        this.setState({"startDateTime": event.target.value});
+    }
+    handleChangeEndDatetime(event) {
+        this.setState({"endDateTime": event.target.value});
     }
 
     render() {
@@ -26,21 +45,21 @@ class App extends Component {
                         <Col xs={5} md={4}>
                             <FormControl
                                 type="text"
-                                value={""}
+                                value={this.state.startDateTime}
                                 placeholder="시작날짜"
-                                onChange={this.handleChange}
+                                onChange={(e)=>this.handleChangeStartDatetime(e)}
                             />
                         </Col>
                         <Col xs={5} md={4}>
                             <FormControl
                                 type="text"
-                                value={""}
+                                value={this.state.endDateTime}
                                 placeholder="끝날짜"
-                                onChange={this.handleChange}
+                                onChange={(e)=>this.handleChangeEndDatetime(e)}
                             />
                         </Col>
                         <Col xs={2} md={4}>
-                            <Button bsStyle="primary" onClick={() => this.handleClickHelloButton()}>조회</Button>
+                            <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
                         </Col>
                     </Row>
                     <ResultTable data={this.state.resultData} />
@@ -48,13 +67,15 @@ class App extends Component {
             </div>
         );
     }
-    handleClickHelloButton() {
+    handleClickSearchButton() {
         this.ajaxCall();
     }
     ajaxCall(){
-        axios.get("http://localhost:9000/aprskin", {
+        let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/aprskin", {
             params:{
                 "start_datetime":this.state['startDateTime']
+                ,"end_datetime":this.state['endDateTime']
             }
         })
         .then((response) => {

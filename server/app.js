@@ -38,13 +38,15 @@ app.get('/hello', (req, res) => {
 app.get('/aprskin', (req, res) => {
     //let startDatetime = res['query']['start_datetime'];
     console.log(req.query.start_datetime);
+    console.log(req.query.end_datetime);
     let param = {
         "service_type":"aprilskinkor"
         ,"mall_id":"onesper"
         ,"data_type":"json"
         ,"auth_code":"995ff59dd187520a69b3a89cc2e71e28"
-        ,"start_datetime":"2017-07-11 15:34:00"
-        ,"end_datetime":"2017-07-11 15:36:00"
+        ,"start_datetime":req.query.start_datetime
+        ,"end_datetime":req.query.end_datetime
+        ,"limit":2000
     }
 
     cafe24.printHttpResponse(
@@ -54,8 +56,6 @@ app.get('/aprskin', (req, res) => {
             res.send(body);
         }
     );
-
-
 });
 
 
