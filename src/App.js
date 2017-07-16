@@ -6,23 +6,23 @@ import axios from 'axios';
 class App extends Component {
     constructor() {
         super();
-        let d = new Date();
-        let yymmdd =
-            d.getFullYear() + "-" +
-            ("00" + (d.getMonth() + 1)).slice(-2) + "-" +
-            ("00" + d.getDate()).slice(-2) + " " +
-            ("00" + d.getHours()).slice(-2) + ":" +
-            ("00" + d.getMinutes()).slice(-2) + ":" +
-            ("00" + d.getSeconds()).slice(-2)
-        ;
+        let nowD = new Date();
+        let beforeD = new Date();
+        beforeD.setHours(nowD.getHours() - 12);
 
-        console.log(yymmdd);
+        let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
+            ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + pDate.getDate()).slice(-2) + " " +
+            ("00" + pDate.getHours()).slice(-2) + ":" +
+            ("00" + pDate.getMinutes()).slice(-2) + ":" +
+            ("00" + pDate.getSeconds()).slice(-2);
 
         this.state = {
             message: "nothing",
-            startDateTime:"2017-07-03 12:00:00",
-            endDateTime:"2017-07-03 12:30:00",
-            resultData:[]
+            startDateTime:getYymmdd(beforeD),
+            endDateTime:getYymmdd(nowD),
+            resultData:[],
+            ownProductList:[]
         };
     }
 
@@ -38,6 +38,8 @@ class App extends Component {
 
     render() {
         console.log(this.state.resultData);
+        console.log(this.state.ownProductList);
+        //if(this.state.ownProductList.length === 0) return false;
         return (
             <div className="App">
                 <Grid>
@@ -62,6 +64,11 @@ class App extends Component {
                             <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
                         </Col>
                     </Row>
+                    <Row className="show-grid">
+                        <Col xs={2} md={4}>
+                            {"행수:" + this.state.resultData.length}
+                        </Col>
+                    </Row>
                     <ResultTable data={this.state.resultData} />
                 </Grid>
             </div>
@@ -72,21 +79,24 @@ class App extends Component {
     }
     ajaxCall(){
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/aprskin", {
+        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
+            params:{
+            }
+        })
+        .then((response) => {
+            console.log(response);
+             let ar = response['data'];
+             this.setState({"ownProductList": ar});
+        });
+        axios.get("http://" + host1 + ":9000/cafe24/list", {
             params:{
                 "start_datetime":this.state['startDateTime']
                 ,"end_datetime":this.state['endDateTime']
             }
         })
         .then((response) => {
-            let list = [];
-            let ar = response['data']['response']['result'];
-            for(let item of ar){
-                for(let productItem of item['product']){
-                    list.push(item);
-                }
-            }
-            this.setState({"resultData": list});
+            let ar = response['data'];
+            this.setState({"resultData": ar});
         });
     }
 }

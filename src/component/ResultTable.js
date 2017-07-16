@@ -10,7 +10,7 @@ class ResultTable extends Component {
         let result = this.props.data;
         console.log(result.length);
         for(let element of result){
-            list2.push(<TrRow key={element.order_no} row={element} />)
+            list2.push(<TrRow key={element.order_no + element.product_code + element.item_code} row={element} />)
         }
         return (
             <Row className="show-grid">
@@ -18,13 +18,23 @@ class ResultTable extends Component {
                     <Table striped bordered condensed hover>
                         <thead>
                         <tr>
+                            <th>no</th>
+                            <th>execution_type</th>
                             <th>order_no</th>
-                            <th>account_sender</th>
+                            <th>request_date</th>
+                            <th>transportation_type</th>
+                            <th>in/out_type</th>
+                            <th>customer_node_code</th>
+                            <th>ship from/to node code</th>
+                            <th>pic_name</th>
                             <th>address1</th>
-                            <th>address2</th>
-                            <th>주문개수</th>
+                            <th>pic_zipcode</th>
+                            <th>pic_tel_no</th>
+                            <th>pic_fax_no</th>
+                            <th>PP/CC</th>
                             <th>product_code</th>
-                            <th>단품인지set인지23</th>
+                            <th>item_code</th>
+                            <th>own_item_code</th>
                         </tr>
 
                         </thead>
@@ -40,16 +50,26 @@ class ResultTable extends Component {
 
 class TrRow extends Component {
     render() {
-        console.log(this.props.row);
+        // console.log(this.props.row);
         return(
             <tr>
+                <td></td>
+                <td></td>
                 <td>{this.props.row['order_no']}</td>
-                <td>{this.props.row['account_sender']}</td>
-                <td>{this.props.row['ship_address1']}</td>
-                <td>{this.props.row['ship_address2']}</td>
-                <td>{this.props.row['product'].length}</td>
-                <td>{this.props.row['product'][0]['product_code']}</td>
-                <td>{"set"}</td>
+                <td>2017-07-17</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{this.props.row['ship_name']}</td>
+                <td>{this.props.row['ship_address1'] + " " +this.props.row['ship_address2'] }</td>
+                <td></td>
+                <td>{this.props.row['ship_mobile']}</td>
+                <td></td>
+                <td></td>
+                <td>{this.props.row['product_code']}</td>
+                <td>{this.props.row['item_code']}</td>
+                <td>{this.props.row['own_item_code']}</td>
 
             </tr>
         )
