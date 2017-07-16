@@ -11,12 +11,14 @@ var con = mysql.createConnection({
 });
 
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    var sql = "INSERT INTO product (product_code, item_code) VALUES ('P00000PM', '000D')";
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
-    });
-});
+// con.connect(function(err) {
+//     if (err) throw err;
+//     console.log("Connected!");
+//     var sql = "INSERT INTO product (product_code, item_code) VALUES ('P00000PM', '000D')";
+//     con.query(sql, function (err, result) {
+//         if (err) throw err;
+//         console.log("1 record inserted");
+//     });
+// });
+
+console.log(process.env);

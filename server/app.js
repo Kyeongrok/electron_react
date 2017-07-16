@@ -14,7 +14,6 @@ const cafe24 = require('./cafe24.js');
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
-
 app.use(cors());
 
 var corsOptions = {
@@ -27,13 +26,6 @@ app.get('/', cors(corsOptions), (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
-app.get('/about', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.get('/hello', (req, res) => {
-    res.send('Hello World!');
-});
 
 app.get('/aprskin', (req, res) => {
     //let startDatetime = res['query']['start_datetime'];
@@ -56,12 +48,6 @@ app.get('/aprskin', (req, res) => {
             res.send(body);
         }
     );
-});
-
-
-app.get('/aprskin', (req, res) => {
-    //product은 아래 주소에서 호출함
-    //https://datahub.cafe24.com/openapi/shop/product/v1/search
 });
 
 module.exports = app;

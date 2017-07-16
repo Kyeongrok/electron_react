@@ -1,13 +1,29 @@
-#설계
+# Aprilskin 주문 조회 시스템
+Aprilskin cafe24 주문 정보를 만들어준다.
 
-날짜 시간 입력하면 결과값을 table형태로 return
+## 접속 방법
+```
+http://ec2-13-59-102-169.us-east-2.compute.amazonaws.com/index.html
+```
+위 주소로 접속 한다.
 
-https://medium.freecodecamp.com/building-an-electron-application-with-create-react-app-97945861647c#.ze6c9qin1
+### 사용법
+시작 날짜 ex)2017-07-16 20:00:00
 
-There is another branch, [npm-start](https://github.com/csepulv/electron-with-create-react-app/tree/npm-start)
-It uses `npm-start` instead of `npm run dev`. (change submitted by [vcarl](https://github.com/vcarl)) Details are in this [pull request](https://github.com/csepulv/electron-with-create-react-app/pull/2)
+끝 날짜 ex)2017-07-16 24:00:00
 
-Thanks to [marbemac](https://github.com/marbemac) for submitting a pull request that captures logging output. It can be found in [logging-capture](https://github.com/csepulv/electron-with-create-react-app/tree/logging-capture)
 
-Thanks to [vicentedealencar](https://github.com/vicentedealencar) for an example of using [electron-builder](https://github.com/electron-userland/electron-builder) for packaging. Details are [here](https://github.com/vicentedealencar/electron-with-create-react-app/commit/f1729381d588e65ac140ce5a08cc6277babd9641).
+### 배포하는 방법
+```
+cd /var/www/electron_react
+git pull
+npm run build
+rsync -ar /var/www/electron_react/build/ /var/www/html
+```
 
+### 재시작 방법
+```
+/var/www/electron_react
+forever list
+forever start server
+```
