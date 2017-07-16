@@ -26,6 +26,9 @@ app.get('/', cors(corsOptions), (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
+app.get('/hello', (req, res) => {
+    res.send("hello");
+});
 
 app.get('/aprskin', (req, res) => {
     //let startDatetime = res['query']['start_datetime'];
