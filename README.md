@@ -27,3 +27,23 @@ rsync -ar /var/www/electron_react/build/ /var/www/html
 forever list
 forever start server
 ```
+
+### 특정 Port로 띄우기
+PORT=80 npm start
+
+
+
+### ubuntu에서 설치
+```
+sudo su -
+apt-get install nginx nodejs
+nginx root : /usr/share/nginx/html
+
+```
+
+### 표준시 서울로 바꾸기
+```
+sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+reboot
+```
+
