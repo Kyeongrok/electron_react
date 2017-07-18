@@ -22,7 +22,7 @@ class App extends Component {
             startDateTime:getYymmdd(beforeD),
             endDateTime:getYymmdd(nowD),
             resultData:[],
-            ownProductList:[]
+            ownProductMap:[]
         };
     }
 
@@ -37,9 +37,19 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.resultData);
-        console.log(this.state.ownProductList);
-        //if(this.state.ownProductList.length === 0) return false;
+        if(this.state.ownProductMap.length === 0) return false;
+        let mappedList = [];
+        for(let item of this.state.resultData) {
+            let key = item['product_code'] + "-" + item['item_code'];
+            let product = this.state.ownProductMap[key];
+            try {
+                item['own_item_code'] = product['own_item_code'];
+            } catch (e) {
+            }
+            mappedList.push(item);
+        }
+
+
         return (
             <div className="App">
                 <Grid>
@@ -69,7 +79,7 @@ class App extends Component {
                             {"행수:" + this.state.resultData.length}
                         </Col>
                     </Row>
-                    <ResultTable data={this.state.resultData} />
+                    <ResultTable data={mappedList} />
                 </Grid>
             </div>
         );
@@ -85,8 +95,8 @@ class App extends Component {
         })
         .then((response) => {
             console.log(response);
-             let ar = response['data'];
-             this.setState({"ownProductList": ar});
+             let map = response['data'];
+             this.setState({"ownProductMap": map});
         });
         axios.get("http://" + host1 + ":9000/cafe24/list", {
             params:{
