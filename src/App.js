@@ -8,7 +8,7 @@ class App extends Component {
         super();
         let nowD = new Date();
         let beforeD = new Date();
-        beforeD.setHours(nowD.getHours() - 12);
+        beforeD.setHours(nowD.getHours() - 3);
 
         let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
             ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
