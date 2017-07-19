@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import {Table, Row, Col} from 'react-bootstrap';
+import axios from 'axios';
 
 class ResultTable2 extends Component {
+    componentWillMount() {
+
+        console.log("component will mount hello");
+    }
     render(){
         console.log(this.props.data);
         /*let list2 = [
@@ -31,19 +36,50 @@ class ResultTable2 extends Component {
                                 <td>item_8</td>
                                 <td>500</td>
                             </tr>
-                            <tr>
-                                <td>won</td>
-                                <td>19</td>
-                                <td>item_9</td>
-                                <td>700</td>
-                            </tr>
+                            <ItemTr />
                         </tbody>
                     </Table>
                 </Col>
             </Row>
         );
     }
+    ajaxCall() {
+        let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
+            params: {}
+        })
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"ownProductMap": map});
+            });
+        axios.get("http://" + host1 + ":9000/cafe24/list", {
+            params: {
+                "start_datetime": this.state['startDateTime']
+                , "end_datetime": this.state['endDateTime']
+            }
+        })
+            .then((response) => {
+                let ar = response['data'];
+                this.setState({"resultData": ar});
+            });
+    }
 }
+
+class ItemTr extends Component {
+    render(){
+        return(
+            <tr>
+                <td>won</td>
+                <td>19</td>
+                <td>item_9</td>
+                <td>700</td>
+            </tr>
+
+        )
+    }
+}
+
 /*
 class TrRow extends Component {
     render() {

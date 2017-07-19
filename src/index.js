@@ -5,21 +5,21 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import NavBar from './component/NavBar';
+import Main from './component/Main';
 import ParserMonitor from './component/ParserMonitor';
 import {HashRouter, Route, Link} from 'react-router-dom';
+import {Button, ButtonToolbar, Grid, Row, Col, FormControl} from 'react-bootstrap';
 
-
-
-class Root extends Component {
+class Root extends Component{
     render(){
         return (
             <HashRouter>
-                <div>
+                <Grid>
                     <NavBar/>
-                    <Route exact path="/" component={App} />
+                    <Route exact path="/" component={Main} />
                     <Route path="/parserMonitor" component={props => <ParserMonitor {...props}/>} />
                     <Route path="/app" component={props => <App {...props}/>} />
-                </div>
+                </Grid>
             </HashRouter>
         )
     }

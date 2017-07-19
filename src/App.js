@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Grid, Row, Col, FormControl} from 'react-bootstrap';
+import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl} from 'react-bootstrap';
 import ResultTable from './component/ResultTable';
 import axios from 'axios';
 
@@ -25,19 +25,15 @@ class App extends Component {
             ownProductMap: []
         };
     }
-
     componentWillMount() {
         this.ajaxCall();
     }
-
     handleChangeStartDatetime(event) {
         this.setState({"startDateTime": event.target.value});
     }
-
     handleChangeEndDatetime(event) {
         this.setState({"endDateTime": event.target.value});
     }
-
     render() {
         //if (this.state.ownProductMap.length === 0) return false;
         let mappedList = [];
@@ -50,16 +46,16 @@ class App extends Component {
             }
             mappedList.push(item);
         }
-
-
         return (
-
-
             <div className="App">
                 <Grid>
-
                     <Row className="show-grid">
-                        <Col xs={5} md={4}>
+                        <Panel>
+
+                        </Panel>
+                    </Row>
+                    <Row className="show-grid">
+                        <Col xs={12} md={4}>
                             <FormControl
                                 type="text"
                                 value={this.state.startDateTime}
@@ -67,7 +63,7 @@ class App extends Component {
                                 onChange={(e) => this.handleChangeStartDatetime(e)}
                             />
                         </Col>
-                        <Col xs={5} md={4}>
+                        <Col xs={12} md={4}>
                             <FormControl
                                 type="text"
                                 value={this.state.endDateTime}
@@ -84,7 +80,11 @@ class App extends Component {
                             {"행수:" + this.state.resultData.length}
                         </Col>
                     </Row>
-                    <ResultTable data={mappedList}/>
+                    <Row className="show-grid">
+                        <ResultTable data={mappedList}/>
+                    </Row>
+
+
                 </Grid>
             </div>
         );
@@ -99,11 +99,11 @@ class App extends Component {
         axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
             params: {}
         })
-            .then((response) => {
-                console.log(response);
-                let map = response['data'];
-                this.setState({"ownProductMap": map});
-            });
+        .then((response) => {
+            console.log(response);
+            let map = response['data'];
+            this.setState({"ownProductMap": map});
+        });
         axios.get("http://" + host1 + ":9000/cafe24/list", {
             params: {
                 "start_datetime": this.state['startDateTime']
@@ -116,5 +116,31 @@ class App extends Component {
             });
     }
 }
+
+
+const buttonsInstance = (
+    <ButtonToolbar>
+        {/* Standard button */}
+        <Button>Default</Button>
+
+        {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
+        <Button bsStyle="primary">Primary</Button>
+
+        {/* Indicates a successful or positive action */}
+        <Button bsStyle="success">Success</Button>
+
+        {/* Contextual button for informational alert messages */}
+        <Button bsStyle="info">Info</Button>
+
+        {/* Indicates caution should be taken with this action */}
+        <Button bsStyle="warning">Warning</Button>
+
+        {/* Indicates a dangerous or potentially negative action */}
+        <Button bsStyle="danger">Danger</Button>
+
+        {/* Deemphasize a button by making it look like a link while maintaining button behavior */}
+        <Button bsStyle="link">Link</Button>
+    </ButtonToolbar>
+);
 
 export default App;
