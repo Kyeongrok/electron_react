@@ -5,7 +5,10 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import NavBar from './component/NavBar';
+import ParserMonitor from './component/ParserMonitor';
 import {HashRouter, Route, Link} from 'react-router-dom';
+
+
 
 class Root extends Component {
     render(){
@@ -14,9 +17,9 @@ class Root extends Component {
                 <div>
                     <NavBar/>
                     <Route exact path="/" component={App} />
-                    {/*<Route path="/parserMonitor" component={props => <ParserMonitor {...props} userData={userData}/>} />*/}
+                    <Route path="/parserMonitor" component={props => <ParserMonitor {...props}/>} />
+                    <Route path="/app" component={props => <App {...props}/>} />
                 </div>
-
             </HashRouter>
         )
     }

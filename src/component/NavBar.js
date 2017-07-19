@@ -13,9 +13,15 @@ class NavBar extends React.Component{
                         <a className="navbar-brand" href="/">메인</a>
                     </div>
                     <ul className="nav navbar-nav navbar-right">
+
                         <li className={this.props.selectedMenu == "score" ? "active" : ""}>
-                            {/*<NavLink to={{pathname: '/statsSchedule'}}>스테츠 스케쥴</NavLink>*/}
+                            <NavLink to={{pathname: '/app'}}>app</NavLink>
                         </li>
+
+                        <li className={this.props.selectedMenu == "score" ? "active" : ""}>
+                        <NavLink to={{pathname: '/parserMonitor'}}>admin</NavLink>
+                        </li>
+
                         <li className={this.props.selectedMenu == "setting" ? "active" : ""}>
                             <a onClick={() => this.state.changeMenu('setting')}>화면1</a>
                         </li>
