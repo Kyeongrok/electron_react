@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import ResultTable2 from './ResultTable2';
+import ResultTable2 from './AdminTable';
 import {Table, Row, Col} from 'react-bootstrap';
 
 
