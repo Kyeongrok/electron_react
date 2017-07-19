@@ -11,35 +11,37 @@ class App extends Component {
         beforeD.setHours(nowD.getHours() - 3);
 
         let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
-            ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
-            ("00" + pDate.getDate()).slice(-2) + " " +
-            ("00" + pDate.getHours()).slice(-2) + ":" +
-            ("00" + pDate.getMinutes()).slice(-2) + ":" +
-            ("00" + pDate.getSeconds()).slice(-2);
+        ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
+        ("00" + pDate.getDate()).slice(-2) + " " +
+        ("00" + pDate.getHours()).slice(-2) + ":" +
+        ("00" + pDate.getMinutes()).slice(-2) + ":" +
+        ("00" + pDate.getSeconds()).slice(-2);
 
         this.state = {
             message: "nothing",
-            startDateTime:getYymmdd(beforeD),
-            endDateTime:getYymmdd(nowD),
-            resultData:[],
-            ownProductMap:[]
+            startDateTime: getYymmdd(beforeD),
+            endDateTime: getYymmdd(nowD),
+            resultData: [],
+            ownProductMap: []
         };
     }
 
     componentWillMount() {
         this.ajaxCall();
     }
+
     handleChangeStartDatetime(event) {
         this.setState({"startDateTime": event.target.value});
     }
+
     handleChangeEndDatetime(event) {
         this.setState({"endDateTime": event.target.value});
     }
 
     render() {
-        if(this.state.ownProductMap.length === 0) return false;
+        //if (this.state.ownProductMap.length === 0) return false;
         let mappedList = [];
-        for(let item of this.state.resultData) {
+        for (let item of this.state.resultData) {
             let key = item['product_code'] + "-" + item['item_code'];
             let product = this.state.ownProductMap[key];
             try {
@@ -51,15 +53,18 @@ class App extends Component {
 
 
         return (
+
+
             <div className="App">
                 <Grid>
+
                     <Row className="show-grid">
                         <Col xs={5} md={4}>
                             <FormControl
                                 type="text"
                                 value={this.state.startDateTime}
                                 placeholder="시작날짜"
-                                onChange={(e)=>this.handleChangeStartDatetime(e)}
+                                onChange={(e) => this.handleChangeStartDatetime(e)}
                             />
                         </Col>
                         <Col xs={5} md={4}>
@@ -67,7 +72,7 @@ class App extends Component {
                                 type="text"
                                 value={this.state.endDateTime}
                                 placeholder="끝날짜"
-                                onChange={(e)=>this.handleChangeEndDatetime(e)}
+                                onChange={(e) => this.handleChangeEndDatetime(e)}
                             />
                         </Col>
                         <Col xs={2} md={4}>
@@ -79,35 +84,36 @@ class App extends Component {
                             {"행수:" + this.state.resultData.length}
                         </Col>
                     </Row>
-                    <ResultTable data={mappedList} />
+                    <ResultTable data={mappedList}/>
                 </Grid>
             </div>
         );
     }
+
     handleClickSearchButton() {
         this.ajaxCall();
     }
-    ajaxCall(){
+
+    ajaxCall() {
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
-            params:{
-            }
+            params: {}
         })
-        .then((response) => {
-            console.log(response);
-             let map = response['data'];
-             this.setState({"ownProductMap": map});
-        });
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"ownProductMap": map});
+            });
         axios.get("http://" + host1 + ":9000/cafe24/list", {
-            params:{
-                "start_datetime":this.state['startDateTime']
-                ,"end_datetime":this.state['endDateTime']
+            params: {
+                "start_datetime": this.state['startDateTime']
+                , "end_datetime": this.state['endDateTime']
             }
         })
-        .then((response) => {
-            let ar = response['data'];
-            this.setState({"resultData": ar});
-        });
+            .then((response) => {
+                let ar = response['data'];
+                this.setState({"resultData": ar});
+            });
     }
 }
 
