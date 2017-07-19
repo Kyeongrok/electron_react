@@ -4,42 +4,39 @@ import {Table, Row, Col} from 'react-bootstrap';
 class ResultTable2 extends Component {
     render(){
         console.log(this.props.data);
-        let list2 = [
-        ]
+        /*let list2 = [
+        ]*/
 
         let result = this.props.data;
         console.log(result.length);
-        for(let element of result){
+        /*for(let element of result){
             list2.push(<TrRow key={element.order_no + element.product_code + element.item_code} row={element} />)
-        }
+        }*/
         return (
             <Row className="show-grid">
                 <Col xs={12} md={12}>
                     <Table striped bordered condensed hover>
                         <thead>
                         <tr>
-                            <th>no</th>
-                            <th>execution_type</th>
-                            <th>order_no</th>
-                            <th>request_date</th>
-                            <th>transportation_type</th>
-                            <th>in/out_type</th>
-                            <th>customer_node_code</th>
-                            <th>ship from/to node code</th>
-                            <th>pic_name</th>
-                            <th>address1</th>
-                            <th>pic_zipcode</th>
-                            <th>pic_tel_no</th>
-                            <th>pic_fax_no</th>
-                            <th>PP/CC</th>
-                            <th>product_code</th>
+                            <th>id</th>
+                            <th>code</th>
                             <th>item_code</th>
-                            <th>own_item_code</th>
+                            <th>quentity</th>
                         </tr>
-
                         </thead>
                         <tbody>
-                            {list2}
+                            <tr>
+                                <td>jung</td>
+                                <td>5</td>
+                                <td>item_8</td>
+                                <td>500</td>
+                            </tr>
+                            <tr>
+                                <td>won</td>
+                                <td>19</td>
+                                <td>item_9</td>
+                                <td>700</td>
+                            </tr>
                         </tbody>
                     </Table>
                 </Col>
@@ -47,7 +44,7 @@ class ResultTable2 extends Component {
         );
     }
 }
-
+/*
 class TrRow extends Component {
     render() {
         // console.log(this.props.row);
@@ -74,7 +71,7 @@ class TrRow extends Component {
             </tr>
         )
     }
-}
+}*/
 
 
 export default ResultTable2;
