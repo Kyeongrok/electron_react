@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl} from 'react-bootstrap';
+import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
 import ResultTable from './component/ResultTable';
 import axios from 'axios';
 
@@ -51,49 +51,45 @@ class App extends Component {
                 <Grid>
                     <Row className="show-grid">
                         <Panel>
-
+                            <Col xs={12} md={4}>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.startDateTime}
+                                    placeholder="시작날짜"
+                                    onChange={(e) => this.handleChangeStartDatetime(e)}
+                                />
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.endDateTime}
+                                    placeholder="끝날짜"
+                                    onChange={(e) => this.handleChangeEndDatetime(e)}
+                                />
+                            </Col>
+                            <Col xs={2} md={4} >
+                                <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
+                            </Col>
+                            <Col xs={4} md={1} xl={1}>
+                                <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
+                            </Col>
                         </Panel>
                     </Row>
+
                     <Row className="show-grid">
-                        <Col xs={12} md={4}>
-                            <FormControl
-                                type="text"
-                                value={this.state.startDateTime}
-                                placeholder="시작날짜"
-                                onChange={(e) => this.handleChangeStartDatetime(e)}
-                            />
-                        </Col>
-                        <Col xs={12} md={4}>
-                            <FormControl
-                                type="text"
-                                value={this.state.endDateTime}
-                                placeholder="끝날짜"
-                                onChange={(e) => this.handleChangeEndDatetime(e)}
-                            />
-                        </Col>
-                        <Col xs={2} md={4}>
-                            <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
-                        </Col>
-                    </Row>
-                    <Row className="show-grid">
-                        <Col xs={2} md={4}>
-                            {"행수:" + this.state.resultData.length}
-                        </Col>
-                    </Row>
-                    <Row className="show-grid">
-                        <ResultTable data={mappedList}/>
-                    </Row>
+                        <Panel>
+                            <ResultTable data={mappedList}/>
+                        </Panel>
 
 
+                    </Row>
                 </Grid>
             </div>
         );
     }
-
     handleClickSearchButton() {
         this.ajaxCall();
     }
-
     ajaxCall() {
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":9000/cafe24/product/list/", {

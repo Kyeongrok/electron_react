@@ -15,7 +15,7 @@ class ResultTable extends Component {
         return (
             <Row className="show-grid">
                 <Col xs={12} md={12}>
-                    <Table striped bordered condensed hover>
+                    <Table striped bordered condensed hover responsive>
                         <thead>
                         <tr>
                             <th>no</th>
@@ -27,7 +27,7 @@ class ResultTable extends Component {
                             <th>customer_node_code</th>
                             <th>ship from/to node code</th>
                             <th>pic_name</th>
-                            <th>address1</th>
+                            <th className="col-md-4">address1</th>
                             <th>pic_zipcode</th>
                             <th>pic_tel_no</th>
                             <th>pic_fax_no</th>
