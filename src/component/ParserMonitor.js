@@ -9,27 +9,14 @@ import axios from 'axios';
 
 
 class ParserMonitor extends React.Component{
-    constructor() {
-        super();
-        this.state = {
-            resultDataSecond: []
-        };
-    }
-
-    componentWillMount() {
-
-        console.log("component will mount hello");
-        this.ajaxCall();
-    }
-
     render(){
         let mappedList = [];
         for (let item of this.state.resultDataSecond) {
             mappedList.push(item);
         }
 
-        console.log("this is ParserMonitor");
-        console.log(this.state.resultDataSecond);
+        //console.log("this is ParserMonitor");
+        //console.log(this.state.resultDataSecond);
 
 
         return (
@@ -38,17 +25,6 @@ class ParserMonitor extends React.Component{
 
     }
 
-    ajaxCall() {
-        let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24", {
-            params: {}
-        })
-            .then((response) => {
-                console.log(response);
-                let map = response['data'];
-                this.setState({"resultDataSecond": map});
-            });
-    }
 }
 
 

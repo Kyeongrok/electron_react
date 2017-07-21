@@ -19,7 +19,7 @@ class NavBar extends React.Component{
                         </li>
 
                         <li className={this.props.selectedMenu == "score" ? "active" : ""}>
-                        <NavLink to={{pathname: '/parserMonitor'}}>admin</NavLink>
+                        <NavLink to={{pathname: '/adminTable'}}>admin</NavLink>
                         </li>
 
                         <li className={this.props.selectedMenu == "setting" ? "active" : ""}>
