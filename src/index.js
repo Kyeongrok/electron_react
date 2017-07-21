@@ -8,6 +8,7 @@ import NavBar from './component/NavBar';
 import Main from './component/Main';
 import {HashRouter, Route, Link} from 'react-router-dom';
 import {Button, ButtonToolbar, Grid, Row, Col, FormControl} from 'react-bootstrap';
+import ParserMonitor from './component/ParserMonitor';
 
 class Root extends Component{
     render(){
@@ -16,6 +17,7 @@ class Root extends Component{
                 <Grid>
                     <NavBar/>
                     <Route exact path="/" component={Main} />
+                    <Route path="/ParserMonitor" component={props => <ParserMonitor {...props}/>} />
                     <Route path="/app" component={props => <App {...props}/>} />
                 </Grid>
             </HashRouter>
