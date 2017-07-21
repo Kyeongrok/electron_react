@@ -12,7 +12,7 @@ class ParserMonitor extends React.Component{
     constructor() {
         super();
         this.state = {
-            resultData: []
+            resultDataSecond: []
         };
     }
 
@@ -24,12 +24,12 @@ class ParserMonitor extends React.Component{
 
     render(){
         let mappedList = [];
-        for (let item of this.state.resultData) {
+        for (let item of this.state.resultDataSecond) {
             mappedList.push(item);
         }
 
         console.log("this is ParserMonitor");
-        console.log(this.state.resultData);
+        console.log(this.state.resultDataSecond);
 
 
         return (
@@ -46,7 +46,7 @@ class ParserMonitor extends React.Component{
             .then((response) => {
                 console.log(response);
                 let map = response['data'];
-                this.setState({"resultData": map});
+                this.setState({"resultDataSecond": map});
             });
     }
 }
