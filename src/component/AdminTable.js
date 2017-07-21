@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import {Table, Row, Col} from 'react-bootstrap';
+import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
+
 import AdminModify from './AdminModify';
 
 class AdminTable extends Component {
     constructor() {
         super();
         this.state = {
-            resultDataSecond: []
+            resultDataSecond: [],
+            selectedRow:null
         };
     }
 
@@ -32,29 +34,37 @@ class AdminTable extends Component {
         }
 
         for(let element of mappedList){
-            list3.push(<TrRow key={element.id + element.code} row={element} />)
+            list3.push(<TrRow key={element.id + element.code} row={element} callbackModify={(row)=>this.callbackModify(row)} />)
         }
 
         return (
-            <Row className="show-grid">
-                <Col xs={12} md={12}>
-                    <Table striped bordered condensed hover>
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Code</th>
-                            <th>Item_Code</th>
-                            <th>Quentity</th>
-                            <th>수정 및 삭제</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {list3}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+            <Panel>
+                <Row className="show-grid">
+                    <Col xs={12} md={12}>
+                        <Table striped bordered condensed hover>
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Code</th>
+                                <th>Item_Code</th>
+                                <th>Quentity</th>
+                                <th>수정 및 삭제</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {list3}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+                <AdminModify row={this.state.selectedRow} />
+
+            </Panel>
+
         );
+    }
+    callbackModify(row){
+        this.setState({selectedRow:row});
     }
 
     ajaxCall() {
@@ -62,17 +72,18 @@ class AdminTable extends Component {
         axios.get("http://" + host1 + ":9000/cafe24", {
             params: {}
         })
-            .then((response) => {
-                console.log(response);
-                let map = response['data'];
-                this.setState({"resultDataSecond": map});
-            });
+        .then((response) => {
+            console.log(response);
+            let map = response['data'];
+            this.setState({"resultDataSecond": map});
+        });
     }
 }
 
 class TrRow extends Component {
     render() {
         console.log(this.props.row);
+
         return(
             <tr>
                 <td>{this.props.row['id']}</td>
@@ -87,7 +98,8 @@ class TrRow extends Component {
     }
 
     handleClickModifyButton(){
-
+        console.log("click modify");
+        this.props.callbackModify(this.props.row);
     }
 }
 
