@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Table, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
+import AdminModify from './AdminModify';
 
 class AdminTable extends Component {
     constructor() {
@@ -78,13 +79,19 @@ class TrRow extends Component {
                 <td>{this.props.row['code']}</td>
                 <td>{this.props.row['item_code']}</td>
                 <td>{this.props.row['quentity']}</td>
-                <td><button onClick>수정</button>
-                    <button onClick>삭제</button>
+                <td><button onClick={() => this.handleClickModifyButton()}>수정</button>
+                    <button>삭제</button>
                 </td>
             </tr>
         );
     }
+
+    handleClickModifyButton(){
+
+    }
 }
+
+
 
 
 export default AdminTable;
