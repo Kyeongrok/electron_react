@@ -15,19 +15,19 @@ class ResultTable extends Component {
         return (
             <Row className="show-grid">
                 <Col xs={12} md={12}>
-                    <Table striped bordered condensed hover responsive>
+                    <Table className="product_table" striped bordered condensed hover responsive>
                         <thead>
                         <tr>
                             <th>no</th>
-                            <th>execution_type</th>
+                            <th>exc_type</th>
                             <th>order_no</th>
                             <th>request_date</th>
-                            <th>transportation_type</th>
+                            <th>tsp_type</th>
                             <th>in/out_type</th>
-                            <th>customer_node_code</th>
-                            <th>ship from/to node code</th>
+                            <th>cust_nd_cd</th>
+                            <th>s f/t nd cd</th>
                             <th>pic_name</th>
-                            <th className="col-md-4">address1</th>
+                            <th className="product_th">address1</th>
                             <th>pic_zipcode</th>
                             <th>pic_tel_no</th>
                             <th>pic_fax_no</th>
