@@ -2,23 +2,20 @@ import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
 
-import AdminModify from './AdminModify';
+import AdminForm from './AdminForm';
 
 class AdminTable extends Component {
     constructor() {
         super();
         this.state = {
             resultDataSecond: [],
-            selectedRow:null
+            selectedRow:null,
+            subMenuMode:"off"
         };
     }
-
     componentWillMount() {
-
-        console.log("component will mount hello");
         this.ajaxCall();
     }
-
     render(){
         console.log(this.props.data);
         let list3 = [];
@@ -36,9 +33,13 @@ class AdminTable extends Component {
         for(let element of mappedList){
             list3.push(<TrRow key={element.id + element.code} row={element} callbackModify={(row)=>this.callbackModify(row)} />)
         }
-
         return (
             <Panel>
+                <Row className="show-grid">
+                    <Col xs={12} md={12}>
+                        <Button bsStyle="primary" onClick={()=>this.handleClickInsert()}>삽입</Button>
+                    </Col>
+                </Row>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <Table striped bordered condensed hover>
@@ -57,14 +58,19 @@ class AdminTable extends Component {
                         </Table>
                     </Col>
                 </Row>
-                <AdminModify row={this.state.selectedRow} />
+                <AdminForm row={this.state.selectedRow} mode={this.state.subMenuMode} />
 
             </Panel>
 
         );
     }
+    handleClickInsert(){
+
+        this.setState({subMenuMode: "insert"});
+    }
+
     callbackModify(row){
-        this.setState({selectedRow:row});
+        this.setState({subMenuMode:"modify", selectedRow:row});
     }
 
     ajaxCall() {
@@ -82,8 +88,6 @@ class AdminTable extends Component {
 
 class TrRow extends Component {
     render() {
-        console.log(this.props.row);
-
         return(
             <tr>
                 <td>{this.props.row['id']}</td>
@@ -98,7 +102,6 @@ class TrRow extends Component {
     }
 
     handleClickModifyButton(){
-        console.log("click modify");
         this.props.callbackModify(this.props.row);
     }
 }

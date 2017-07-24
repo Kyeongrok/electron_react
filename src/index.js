@@ -8,7 +8,8 @@ import NavBar from './component/NavBar';
 import Main from './component/Main';
 import {HashRouter, Route, Link} from 'react-router-dom';
 import {Button, ButtonToolbar, Grid, Row, Col, FormControl} from 'react-bootstrap';
-import AdminTable from './component/AdminTable';
+import AdminTable from './component/AdminPage';
+import Dashboard from './component/Dashboard';
 
 class Root extends Component{
     render(){
@@ -19,6 +20,7 @@ class Root extends Component{
                     <Route exact path="/" component={Main} />
                     <Route path="/adminTable" component={props => <AdminTable {...props}/>} />
                     <Route path="/app" component={props => <App {...props}/>} />
+                    <Route path="/dashboard" component={props => <Dashboard {...props}/>} />
                 </Grid>
             </HashRouter>
         )

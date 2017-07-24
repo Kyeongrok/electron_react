@@ -39,4 +39,6 @@ index.html -> react -> componentWillMount -> axios -> index.php(code igniter)
 host/gateway/product_info.php
 
 
+form에 뭐 넣으면 수정 되는 기능
+
 

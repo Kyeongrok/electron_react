@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import AdminTable from './AdminTable';
+import AdminTable from './AdminPage';
 import {Table, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 
