@@ -95,7 +95,7 @@ class TrRow extends Component {
                 <td>{this.props.row['item_code']}</td>
                 <td>{this.props.row['quentity']}</td>
                 <td><button onClick={() => this.handleClickModifyButton()}>수정</button>
-                    <button>삭제</button>
+                    <button onClick={() => this.handleDeleteButton(this.props.row['id'])}>삭제</button>
                 </td>
             </tr>
         );
@@ -103,6 +103,20 @@ class TrRow extends Component {
 
     handleClickModifyButton(){
         this.props.callbackModify(this.props.row);
+    }
+
+    handleDeleteButton(id) {
+        let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/cafe24/product/delete?id=" + id, {
+            params: {}
+        })
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"resultDataSecond": map});
+            });
+
+        window.location.reload();
     }
 }
 
