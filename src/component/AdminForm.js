@@ -3,13 +3,15 @@
  */
 import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import axios from 'axios';
 
 class AdminForm extends Component{
     constructor() {
         super();
         this.state = {
             mode:"off",
-            row:{"id":0, "code":"", "item_code":"", "quentity":0}
+            row:{"id": "", "code":"", "item_code":"", "quentity":""},
+            resultDataSecond : []
         };
     }
     handleChangeFieldValue(event, sFieldName){
@@ -53,7 +55,7 @@ class AdminForm extends Component{
                                     type="text"
                                     value={this.state.row['id']}
                                     placeholder="id"
-                                    onChange={()=>console.log("hello")}
+                                    onChange={(event)=> this.handleChangeFieldValue(event, "id")}
                                 />
 
                                 <ControlLabel>code</ControlLabel>
@@ -88,6 +90,23 @@ class AdminForm extends Component{
             </Row>
         )
     }
+
+    handleClickButton() {
+        let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "code="
+            + this.state.row['code'] + "item_code=" + this.state.row['item_code'] + "quentity="
+            + this.state.row['quentity'], {
+            params: {}
+        })
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"resultDataSecond": map});
+            });
+
+        window.location.reload();
+    }
+
 }
 
 
