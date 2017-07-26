@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
+import Progress from '../common/component/Progress';
 
 import AdminForm from './AdminForm';
 
@@ -9,14 +10,17 @@ class AdminTable extends Component {
         super();
         this.state = {
             resultDataSecond: [],
-            selectedRow:null,
-            subMenuMode:"off"
+            selectedRow: null,
+            subMenuMode: "off",
+            ajaxComplete:false
         };
     }
+
     componentWillMount() {
         this.ajaxCall();
     }
-    render(){
+
+    render() {
         console.log(this.props.data);
         let list3 = [];
 
@@ -30,14 +34,15 @@ class AdminTable extends Component {
             mappedList.push(item);
         }
 
-        for(let element of mappedList){
-            list3.push(<TrRow key={element.id + element.code} row={element} callbackModify={(row)=>this.callbackModify(row)} />)
+        for (let element of mappedList) {
+            list3.push(<TrRow key={element.id + element.code} row={element}
+                              callbackModify={(row) => this.callbackModify(row)}/>)
         }
         return (
             <Panel>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
-                        <Button bsStyle="primary" onClick={()=>this.handleClickInsert()}>삽입</Button>
+                        <Button bsStyle="primary" onClick={() => this.handleClickInsert()}>삽입</Button>
                     </Col>
                 </Row>
                 <Row className="show-grid">
@@ -58,19 +63,20 @@ class AdminTable extends Component {
                         </Table>
                     </Col>
                 </Row>
-                <AdminForm row={this.state.selectedRow} mode={this.state.subMenuMode} />
-
+                <AdminForm row={this.state.selectedRow} mode={this.state.subMenuMode}/>
+                {list3.length == 0 ? <Progress/> : null}
             </Panel>
 
         );
     }
-    handleClickInsert(){
+
+    handleClickInsert() {
 
         this.setState({subMenuMode: "insert"});
     }
 
-    callbackModify(row){
-        this.setState({subMenuMode:"modify", selectedRow:row});
+    callbackModify(row) {
+        this.setState({subMenuMode: "modify", selectedRow: row});
     }
 
     ajaxCall() {
@@ -78,30 +84,31 @@ class AdminTable extends Component {
         axios.get("http://" + host1 + ":9000/cafe24", {
             params: {}
         })
-        .then((response) => {
-            console.log(response);
-            let map = response['data'];
-            this.setState({"resultDataSecond": map});
-        });
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"resultDataSecond": map});
+            });
     }
 }
 
 class TrRow extends Component {
     render() {
-        return(
+        return (
             <tr>
                 <td>{this.props.row['id']}</td>
                 <td>{this.props.row['code']}</td>
                 <td>{this.props.row['item_code']}</td>
                 <td>{this.props.row['quentity']}</td>
-                <td><button onClick={() => this.handleClickModifyButton()}>수정</button>
+                <td>
+                    <button onClick={() => this.handleClickModifyButton()}>수정</button>
                     <button onClick={() => this.handleDeleteButton(this.props.row['id'])}>삭제</button>
                 </td>
             </tr>
         );
     }
 
-    handleClickModifyButton(){
+    handleClickModifyButton() {
         this.props.callbackModify(this.props.row);
     }
 
@@ -119,8 +126,6 @@ class TrRow extends Component {
         window.location.reload();
     }
 }
-
-
 
 
 export default AdminTable;

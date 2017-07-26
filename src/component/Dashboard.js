@@ -11,7 +11,7 @@ class Dashboard extends Component {
     }
     render() {
         return(
-            <div>
+            <Panel>
                 대시보드
                 일별, 시간별, 브랜드별 매출
                 <Table className="product_table" striped bordered condensed hover responsive>
@@ -54,7 +54,7 @@ class Dashboard extends Component {
                     </tr>
                     </tbody>
                 </Table>
-            </div>
+            </Panel>
         )
     }
 }

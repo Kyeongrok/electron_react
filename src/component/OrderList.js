@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
-import ResultTable from './component/ResultTable';
+import ResultTable from './ResultTable';
 import axios from 'axios';
+import Progress from '../common/component/Progress';
 
 class App extends Component {
     constructor() {
@@ -78,10 +79,10 @@ class App extends Component {
 
                     <Row className="show-grid">
                         <Panel>
+
                             <ResultTable data={mappedList}/>
+                            {mappedList.length == 0 ? <Progress/> : null}
                         </Panel>
-
-
                     </Row>
                 </Grid>
             </div>
