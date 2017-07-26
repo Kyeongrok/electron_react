@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './component/OrderList';
+import App from './component/order/OrderList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

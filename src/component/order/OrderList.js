@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
-import ResultTable from './ResultTable';
+import ResultTable from './OrderResultTable';
 import axios from 'axios';
-import Progress from '../common/component/Progress';
+import Progress from '../../common/component/Progress';
 
-class App extends Component {
+class OrderList extends Component {
     constructor() {
         super();
         let nowD = new Date();
@@ -79,7 +79,6 @@ class App extends Component {
 
                     <Row className="show-grid">
                         <Panel>
-
                             <ResultTable data={mappedList}/>
                             {mappedList.length == 0 ? <Progress/> : null}
                         </Panel>
@@ -114,30 +113,4 @@ class App extends Component {
     }
 }
 
-
-const buttonsInstance = (
-    <ButtonToolbar>
-        {/* Standard button */}
-        <Button>Default</Button>
-
-        {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
-        <Button bsStyle="primary">Primary</Button>
-
-        {/* Indicates a successful or positive action */}
-        <Button bsStyle="success">Success</Button>
-
-        {/* Contextual button for informational alert messages */}
-        <Button bsStyle="info">Info</Button>
-
-        {/* Indicates caution should be taken with this action */}
-        <Button bsStyle="warning">Warning</Button>
-
-        {/* Indicates a dangerous or potentially negative action */}
-        <Button bsStyle="danger">Danger</Button>
-
-        {/* Deemphasize a button by making it look like a link while maintaining button behavior */}
-        <Button bsStyle="link">Link</Button>
-    </ButtonToolbar>
-);
-
-export default App;
+export default OrderList;
