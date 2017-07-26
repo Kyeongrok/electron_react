@@ -91,8 +91,19 @@ class AdminForm extends Component{
         )
     }
 
+
     handleClickButton() {
         let host1 = window.location.hostname;
+        if(this.props.mode == 'insert') {
+            this.insertCall(host1);
+        } else if (this.props.mode == 'modify'){
+            this.modifyCall(host1);
+        }
+
+        window.location.reload();
+    }
+
+    insertCall(host1){
         axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
@@ -104,9 +115,23 @@ class AdminForm extends Component{
                 let map = response['data'];
                 this.setState({"resultDataSecond": map});
             });
-
-        window.location.reload();
     }
+
+    modifyCall(host1) {
+        axios.get("http://" + host1 + ":9000/cafe24/product/modify?id=" + this.state.row['id'] + "&code="
+            + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
+            + this.state.row['quentity'], {
+            params: {}
+
+        })
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"resultDataSecond": map});
+            });
+
+    }
+
 
 }
 
