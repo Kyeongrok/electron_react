@@ -76,6 +76,15 @@ class OrderList extends Component {
                             </Col>
                         </Panel>
                     </Row>
+                    <Row className="show-grid">
+                        <Panel>
+                            <Button onClick={(event)=>console.log("hello")}>00:00~06:00</Button>
+                            <Button onClick={(event)=>console.log("hello")}>06:01~12:00</Button>
+                            <Button onClick={(event)=>console.log("hello")}>12:01~18:00</Button>
+                            <Button onClick={(event)=>console.log("hello")}>18:01~24:00</Button>
+
+                        </Panel>
+                    </Row>
 
                     <Row className="show-grid">
                         <Panel>

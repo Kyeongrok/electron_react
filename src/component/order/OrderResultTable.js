@@ -8,7 +8,6 @@ class ResultTable extends Component {
         ]
 
         let result = this.props.data;
-        console.log(result.length);
         for(let element of result){
             list2.push(<TrRow key={element.order_no + element.product_code + element.item_code} row={element} />)
         }
