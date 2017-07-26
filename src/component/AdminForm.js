@@ -93,10 +93,11 @@ class AdminForm extends Component{
 
     handleClickButton() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "code="
-            + this.state.row['code'] + "item_code=" + this.state.row['item_code'] + "quentity="
+        axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "&code="
+            + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
             params: {}
+
         })
             .then((response) => {
                 console.log(response);
