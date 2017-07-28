@@ -134,7 +134,8 @@ class OrderList extends Component {
     handleDawnTime() {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
-            startDateTime: todatYymmdd + " " + "00:00:00"
+            resultData:[]
+            ,startDateTime: todatYymmdd + " " + "00:00:00"
             ,endDateTime: todatYymmdd + " " + "06:00:00"
         });
         this.timeCall();
