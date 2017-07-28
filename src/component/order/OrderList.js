@@ -11,22 +11,6 @@ class OrderList extends Component {
         let beforeD = new Date();
         beforeD.setHours(nowD.getHours() - 3);
 
-        let initD = new Date();
-        let initDSecond = new Date();
-        let initDThird = new Date();
-        let initDFourth = new Date();
-        let initDFifth = new Date();
-        let initDSixth = new Date();
-        let initDSeventh = new Date();
-        initD.setHours("00","00");
-        initDSecond.setHours(initD.getHours() + 6);
-        initDThird.setHours("06","01");
-        initDFourth.setHours("12","00");
-        initDFifth.setHours(initDFourth.getHours() + 6);
-        initDSixth.setHours("18","01");
-        initDSeventh.setHours("24","00");
-
-
 
         let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
             ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
@@ -42,13 +26,6 @@ class OrderList extends Component {
             message: "nothing",
             startDateTime: getYymmdd(beforeD),
             endDateTime: getYymmdd(nowD),
-            initDateTime : getYymmdd(initD),
-            init_2_DateTime : getYymmdd(initDSecond),
-            init_3_DateTime : getYymmdd(initDThird),
-            init_4_DateTime : getYymmdd(initDFourth),
-            init_5_DateTime : getYymmdd(initDFifth),
-            init_6_DateTime : getYymmdd(initDSixth),
-            init_7_DateTime : getYymmdd(initDSeventh),
             resultData: [],
             ownProductMap: []
         };
@@ -161,25 +138,49 @@ class OrderList extends Component {
             startDateTime: todatYymmdd + " " + "00:00:00"
             ,endDateTime: todatYymmdd + " " + "06:00:00"
         });
-
+        this.timeCall();
     }
 
     handleAmTime() {
-        this.timeCall(this.init_3_DateTime , this.init_4_DateTime)
+        let todatYymmdd = this.getYymmdd(new Date());
+        this.setState({
+            startDateTime: todatYymmdd + " " + "06:01:00"
+            ,endDateTime: todatYymmdd + " " + "12:00:00"
+        });
+        this.timeCall();
     }
     handlePmTime() {
-        this.timeCall(this.init_4_DateTime , this.init_5_DateTime)
+        let todatYymmdd = this.getYymmdd(new Date());
+        this.setState({
+            startDateTime: todatYymmdd + " " + "12:00:00"
+            ,endDateTime: todatYymmdd + " " + "18:00:00"
+        });
+        this.timeCall();
     }
     handleNightTime(){
-        this.timeCall(this.init_6_DateTime , this.init_7_DateTime)
+        let todatYymmdd = this.getYymmdd(new Date());
+        this.setState({
+            startDateTime: todatYymmdd + " " + "18:01:00"
+            ,endDateTime: todatYymmdd + " " + "24:00:00"
+        });
+        this.timeCall();
     }
 
-    timeCall(e, k) {
+
+    timeCall() {
         let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
+            params: {}
+        })
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"ownProductMap": map});
+            });
         axios.get("http://" + host1 + ":9000/cafe24/list", {
             params: {
-                "start_datetime": this.state[e]
-                , "end_datetime": this.state[k]
+                "start_datetime": this.state['startDateTime']
+                , "end_datetime": this.state['endDateTime']
             }
         })
             .then((response) => {
@@ -187,6 +188,7 @@ class OrderList extends Component {
                 this.setState({"resultData": ar});
             });
     }
+
 
 }
 
