@@ -12,37 +12,33 @@ class ResultTable extends Component {
             list2.push(<TrRow key={element.order_no + element.product_code + element.item_code} row={element} />)
         }
         return (
-            <Row className="show-grid">
-                <Col xs={12} md={12}>
-                    <Table className="product_table" striped bordered condensed hover responsive>
-                        <thead>
-                        <tr>
-                            <th>no</th>
-                            <th>exc_type</th>
-                            <th>order_no</th>
-                            <th>request_date</th>
-                            <th>tsp_type</th>
-                            <th>in/out_type</th>
-                            <th>cust_nd_cd</th>
-                            <th>s f/t nd cd</th>
-                            <th>pic_name</th>
-                            <th className="product_th">address1</th>
-                            <th>pic_zipcode</th>
-                            <th>pic_tel_no</th>
-                            <th>pic_fax_no</th>
-                            <th>PP/CC</th>
-                            <th>product_code</th>
-                            <th>item_code</th>
-                            <th>own_item_code</th>
-                        </tr>
+            <Table className="product_table" striped bordered condensed hover responsive>
+                <thead>
+                <tr>
+                    <th>no</th>
+                    <th>exc_type</th>
+                    <th>order_no</th>
+                    <th>request_date</th>
+                    <th>tsp_type</th>
+                    <th>in/out_type</th>
+                    <th>cust_nd_cd</th>
+                    <th>s f/t nd cd</th>
+                    <th>pic_name</th>
+                    <th className="product_th">address1</th>
+                    <th>pic_zipcode</th>
+                    <th>pic_tel_no</th>
+                    <th>pic_fax_no</th>
+                    <th>PP/CC</th>
+                    <th>product_code</th>
+                    <th>item_code</th>
+                    <th>own_item_code</th>
+                </tr>
 
-                        </thead>
-                        <tbody>
-                            {list2}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+                </thead>
+                <tbody>
+                    {list2}
+                </tbody>
+            </Table>
         );
     }
 }

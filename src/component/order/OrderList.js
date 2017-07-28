@@ -98,8 +98,7 @@ class OrderList extends Component {
 
                     <Row className="show-grid">
                         <Panel>
-                            <ResultTable data={mappedList}/>
-                            {mappedList.length == 0 ? <Progress/> : null}
+                            {mappedList.length == 0 ? <Progress/> : <ResultTable data={mappedList}/>}
                         </Panel>
                     </Row>
                 </Grid>
