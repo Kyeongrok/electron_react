@@ -79,8 +79,8 @@ class InvoiceList extends Component {
                                 />
                             </Col>
                             <Col xs={2} md={3} >
-
                                 <FormControl onChange={(event)=>this.handleChangeSelectedTime(event)} componentClass="select" placeholder="select">
+                                    <option value="00:00:00~24:00:00">::전체::</option>
                                     <option value="00:00:00~06:00:00">00:00:00~06:00:00</option>
                                     <option value="06:00:01~12:00:00">06:00:01~12:00:00</option>
                                     <option value="12:00:01~18:00:00">12:00:01~18:00:00</option>
