@@ -150,7 +150,7 @@ class OrderList extends Component {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
             resultData:[]
-            ,startDateTime: todatYymmdd + " " + "06:01:00"
+            ,startDateTime: todatYymmdd + " " + "06:00:01"
             ,endDateTime: todatYymmdd + " " + "12:00:00"
         });
         this.ajaxCall();
@@ -160,7 +160,7 @@ class OrderList extends Component {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
             resultData:[]
-            ,startDateTime: todatYymmdd + " " + "12:00:00"
+            ,startDateTime: todatYymmdd + " " + "12:00:01"
             ,endDateTime: todatYymmdd + " " + "18:00:00"
         });
         this.ajaxCall();
@@ -170,7 +170,7 @@ class OrderList extends Component {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
             resultData:[]
-            ,startDateTime: todatYymmdd + " " + "18:01:00"
+            ,startDateTime: todatYymmdd + " " + "18:00:01"
             ,endDateTime: todatYymmdd + " " + "24:00:00"
         });
         this.ajaxCall();
