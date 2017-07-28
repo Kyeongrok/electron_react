@@ -11,6 +11,23 @@ class OrderList extends Component {
         let beforeD = new Date();
         beforeD.setHours(nowD.getHours() - 3);
 
+        let initD = new Date();
+        let initDSecond = new Date();
+        let initDThird = new Date();
+        let initDFourth = new Date();
+        let initDFifth = new Date();
+        let initDSixth = new Date();
+        let initDSeventh = new Date();
+        initD.setHours("00","00");
+        initDSecond.setHours(initD.getHours() + 6);
+        initDThird.setHours("06","01");
+        initDFourth.setHours("12","00");
+        initDFifth.setHours(initDFourth.getHours() + 6);
+        initDSixth.setHours("18","01");
+        initDSeventh.setHours("24","00");
+
+
+
         let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
         ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
         ("00" + pDate.getDate()).slice(-2) + " " +
@@ -18,10 +35,19 @@ class OrderList extends Component {
         ("00" + pDate.getMinutes()).slice(-2) + ":" +
         ("00" + pDate.getSeconds()).slice(-2);
 
+
+
         this.state = {
             message: "nothing",
             startDateTime: getYymmdd(beforeD),
             endDateTime: getYymmdd(nowD),
+            initDateTime : getYymmdd(initD),
+            init_2_DateTime : getYymmdd(initDSecond),
+            init_3_DateTime : getYymmdd(initDThird),
+            init_4_DateTime : getYymmdd(initDFourth),
+            init_5_DateTime : getYymmdd(initDFifth),
+            init_6_DateTime : getYymmdd(initDSixth),
+            init_7_DateTime : getYymmdd(initDSeventh),
             resultData: [],
             ownProductMap: []
         };
@@ -78,10 +104,10 @@ class OrderList extends Component {
                     </Row>
                     <Row className="show-grid">
                         <Panel>
-                            <Button onClick={(event)=>console.log("hello")}>00:00~06:00</Button>
-                            <Button onClick={(event)=>console.log("hello")}>06:01~12:00</Button>
-                            <Button onClick={(event)=>console.log("hello")}>12:01~18:00</Button>
-                            <Button onClick={(event)=>console.log("hello")}>18:01~24:00</Button>
+                            <Button onClick={()=> this.handleDawnTime()}>00:00~06:00</Button>
+                            <Button onClick={()=> this.handleAmTime()}>06:01~12:00</Button>
+                            <Button onClick={()=> this.handlePmTime()}>12:01~18:00</Button>
+                            <Button onClick={()=> this.handleNightTime()}>18:01~24:00</Button>
 
                         </Panel>
                     </Row>
@@ -99,6 +125,7 @@ class OrderList extends Component {
     handleClickSearchButton() {
         this.ajaxCall();
     }
+
     ajaxCall() {
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
@@ -120,6 +147,35 @@ class OrderList extends Component {
                 this.setState({"resultData": ar});
             });
     }
+
+    handleDawnTime() {
+        this.timeCall(this.initDateTime , this.init_2_DateTime )
+    }
+
+    handleAmTime() {
+        this.timeCall(this.init_3_DateTime , this.init_4_DateTime)
+    }
+    handlePmTime() {
+        this.timeCall(this.init_4_DateTime , this.init_5_DateTime)
+    }
+    handleNightTime(){
+        this.timeCall(this.init_6_DateTime , this.init_7_DateTime)
+    }
+
+    timeCall(e, k) {
+        let host1 = window.location.hostname;
+        axios.get("http://" + host1 + ":9000/cafe24/list", {
+            params: {
+                "start_datetime": this.state[e]
+                , "end_datetime": this.state[k]
+            }
+        })
+            .then((response) => {
+                let ar = response['data'];
+                this.setState({"resultData": ar});
+            });
+    }
+
 }
 
 export default OrderList;
