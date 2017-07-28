@@ -112,7 +112,9 @@ class AdminForm extends Component{
         axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
-            params: {}
+            params: {
+                "own_item_code":this.state.row['own_item_code']
+            }
 
         })
             .then((response) => {
