@@ -81,7 +81,7 @@ class OrderList extends Component {
                             <Col xs={2} md={4} >
                                 <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
                             </Col>
-                            <Col xs={4} md={1} xl={1}>
+                            <Col xs={4} md={1}>
                                 <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
                             </Col>
                         </Panel>
@@ -126,19 +126,24 @@ class OrderList extends Component {
             }
         })
             .then((response) => {
-                let ar = response['data'];
+                console.log(response);
+                let ar = response['data']['list'];
+                console.log(ar);
                 this.setState({"resultData": ar});
             });
     }
 
     handleDawnTime() {
+        console.log("hello----");
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
             resultData:[]
             ,startDateTime: todatYymmdd + " " + "00:00:00"
             ,endDateTime: todatYymmdd + " " + "06:00:00"
         });
-        this.timeCall();
+
+        this.ajaxCall();
+
     }
 
     handleAmTime() {
@@ -148,7 +153,8 @@ class OrderList extends Component {
             ,startDateTime: todatYymmdd + " " + "06:01:00"
             ,endDateTime: todatYymmdd + " " + "12:00:00"
         });
-        this.timeCall();
+        this.ajaxCall();
+
     }
     handlePmTime() {
         let todatYymmdd = this.getYymmdd(new Date());
@@ -157,7 +163,8 @@ class OrderList extends Component {
             ,startDateTime: todatYymmdd + " " + "12:00:00"
             ,endDateTime: todatYymmdd + " " + "18:00:00"
         });
-        this.timeCall();
+        this.ajaxCall();
+
     }
     handleNightTime(){
         let todatYymmdd = this.getYymmdd(new Date());
@@ -166,31 +173,12 @@ class OrderList extends Component {
             ,startDateTime: todatYymmdd + " " + "18:01:00"
             ,endDateTime: todatYymmdd + " " + "24:00:00"
         });
-        this.timeCall();
+        this.ajaxCall();
+
     }
 
 
-    timeCall() {
-        let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
-            params: {}
-        })
-            .then((response) => {
-                console.log(response);
-                let map = response['data'];
-                this.setState({"ownProductMap": map});
-            });
-        axios.get("http://" + host1 + ":9000/cafe24/list", {
-            params: {
-                "start_datetime": this.state['startDateTime']
-                , "end_datetime": this.state['endDateTime']
-            }
-        })
-            .then((response) => {
-                let ar = response['data'];
-                this.setState({"resultData": ar});
-            });
-    }
+
 
 
 }
