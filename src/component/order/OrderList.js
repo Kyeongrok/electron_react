@@ -98,7 +98,7 @@ class OrderList extends Component {
 
                     <Row className="show-grid">
                         <Panel>
-                            {mappedList.length == 0 ? <Progress/> : <ResultTable data={mappedList}/>}
+                            {this.state.resultData.length == 0 ? <Progress/> : <ResultTable data={mappedList}/>}
                         </Panel>
                     </Row>
                 </Grid>
@@ -143,7 +143,8 @@ class OrderList extends Component {
     handleAmTime() {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
-            startDateTime: todatYymmdd + " " + "06:01:00"
+            resultData:[]
+            ,startDateTime: todatYymmdd + " " + "06:01:00"
             ,endDateTime: todatYymmdd + " " + "12:00:00"
         });
         this.timeCall();
@@ -151,7 +152,8 @@ class OrderList extends Component {
     handlePmTime() {
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
-            startDateTime: todatYymmdd + " " + "12:00:00"
+            resultData:[]
+            ,startDateTime: todatYymmdd + " " + "12:00:00"
             ,endDateTime: todatYymmdd + " " + "18:00:00"
         });
         this.timeCall();
@@ -159,7 +161,8 @@ class OrderList extends Component {
     handleNightTime(){
         let todatYymmdd = this.getYymmdd(new Date());
         this.setState({
-            startDateTime: todatYymmdd + " " + "18:01:00"
+            resultData:[]
+            ,startDateTime: todatYymmdd + " " + "18:01:00"
             ,endDateTime: todatYymmdd + " " + "24:00:00"
         });
         this.timeCall();

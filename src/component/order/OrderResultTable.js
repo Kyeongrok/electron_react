@@ -70,6 +70,4 @@ class TrRow extends Component {
         )
     }
 }
-
-
 export default ResultTable;
