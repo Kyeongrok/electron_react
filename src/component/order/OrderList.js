@@ -29,12 +29,13 @@ class OrderList extends Component {
 
 
         let getYymmdd = (pDate) => pDate.getFullYear() + "-" +
-        ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
-        ("00" + pDate.getDate()).slice(-2) + " " +
-        ("00" + pDate.getHours()).slice(-2) + ":" +
-        ("00" + pDate.getMinutes()).slice(-2) + ":" +
-        ("00" + pDate.getSeconds()).slice(-2);
+            ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + pDate.getDate()).slice(-2) + " " +
+            ("00" + pDate.getHours()).slice(-2) + ":" +
+            ("00" + pDate.getMinutes()).slice(-2) + ":" +
+            ("00" + pDate.getSeconds()).slice(-2);
 
+        console.log(this.getYymmdd(new Date()));
 
 
         this.state = {
@@ -51,6 +52,12 @@ class OrderList extends Component {
             resultData: [],
             ownProductMap: []
         };
+    }
+    getYymmdd(pDate){
+        let a = (pDate) => pDate.getFullYear() + "-" +
+            ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + pDate.getDate()).slice(-2);
+        return a(pDate);
     }
     componentWillMount() {
         this.ajaxCall();
@@ -149,7 +156,12 @@ class OrderList extends Component {
     }
 
     handleDawnTime() {
-        this.timeCall(this.initDateTime , this.init_2_DateTime )
+        let todatYymmdd = this.getYymmdd(new Date());
+        this.setState({
+            startDateTime: todatYymmdd + " " + "00:00:00"
+            ,endDateTime: todatYymmdd + " " + "06:00:00"
+        });
+
     }
 
     handleAmTime() {
