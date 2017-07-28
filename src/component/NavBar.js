@@ -20,23 +20,26 @@ class NavBar extends React.Component{
 
                 </Navbar.Header>
                 <Nav>
-                    <LinkContainer to="/app">
-                        <NavItem eventKey={1}>주문목록</NavItem>
-                    </LinkContainer>
+                    <NavDropdown eventKey={4} title="주문목록" id="basic-nav-dropdown">
+
+                        <LinkContainer to="/invoiceList">
+                            <MenuItem eventKey={4.1}>송장용</MenuItem>
+                        </LinkContainer>
+                        <LinkContainer to="/orderList">
+                            <MenuItem eventKey={4.2}>주문조회</MenuItem>
+                        </LinkContainer>
+
+                    </NavDropdown>
+
+                    
                     <LinkContainer to="/adminTable">
-                        <NavItem eventKey={2}>관리자</NavItem>
+                        <NavItem eventKey={1}>관리자</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/dashboard">
-                        <NavItem eventKey={3}>대시보드</NavItem>
+                        <NavItem eventKey={2}>대시보드</NavItem>
                     </LinkContainer>
 
-                    <NavDropdown eventKey={4} title="Dropdown" id="basic-nav-dropdown">
-                        <MenuItem eventKey={4.1}>Action</MenuItem>
-                        <MenuItem eventKey={4.2}>Another action</MenuItem>
-                        <MenuItem eventKey={4.3}>Something else here</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey={4.4}>Separated link</MenuItem>
-                    </NavDropdown>
+
                 </Nav>
             </Navbar>
 

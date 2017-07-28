@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
-import Progress from '../common/component/Progress';
+import Progress from '../../common/component/Progress';
 
 import AdminForm from './AdminForm';
 
@@ -53,6 +53,7 @@ class AdminTable extends Component {
                                 <th>Id</th>
                                 <th>Code</th>
                                 <th>Item_Code</th>
+                                <th>own_Item_Code</th>
                                 <th>Quentity</th>
                                 <th>수정 및 삭제</th>
                             </tr>
@@ -99,6 +100,7 @@ class TrRow extends Component {
                 <td>{this.props.row['id']}</td>
                 <td>{this.props.row['code']}</td>
                 <td>{this.props.row['item_code']}</td>
+                <td>{this.props.row['own_item_code']}</td>
                 <td>{this.props.row['quentity']}</td>
                 <td>
                     <button onClick={() => this.handleClickModifyButton()}>수정</button>

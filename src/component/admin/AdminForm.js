@@ -10,7 +10,7 @@ class AdminForm extends Component{
         super();
         this.state = {
             mode:"off",
-            row:{"id": "", "code":"", "item_code":"", "quentity":""},
+            row:{"id": "", "code":"", "item_code":"", "own_item_code":"", "quentity":""},
             resultDataSecond : []
         };
     }
@@ -18,9 +18,6 @@ class AdminForm extends Component{
         let row = this.state.row;
         row[sFieldName] = event.target.value;
         this.setState({row:row})
-    }
-    handleClickButton(){
-        console.log(this.state.row);
     }
     componentWillMount(){
         console.log(this.props.row);
@@ -74,6 +71,14 @@ class AdminForm extends Component{
                                     onChange={(event)=>this.handleChangeFieldValue(event, "item_code")}
                                 />
 
+                                <ControlLabel>own_item_code</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['own_item_code']}
+                                    placeholder="own_item_code"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "own_item_code")}
+                                />
+
                                 <ControlLabel>quentity</ControlLabel>
                                 <FormControl
                                     type="text"
@@ -121,7 +126,9 @@ class AdminForm extends Component{
         axios.get("http://" + host1 + ":9000/cafe24/product/modify?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
-            params: {}
+            params: {
+                "own_item_code":this.state.row['own_item_code']
+            }
 
         })
             .then((response) => {

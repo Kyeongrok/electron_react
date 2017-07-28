@@ -3,7 +3,7 @@ import {Table, Row, Col} from 'react-bootstrap';
 
 class ResultTable extends Component {
     render(){
-        console.log(this.props.data);
+        // console.log(this.props.data);
         let list2 = [
         ]
 

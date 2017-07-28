@@ -4,7 +4,7 @@ import ResultTable from './OrderResultTable';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
 
-class OrderList extends Component {
+class InvoiceList extends Component {
     constructor() {
         super();
         let nowD = new Date();
@@ -19,6 +19,7 @@ class OrderList extends Component {
             ("00" + pDate.getSeconds()).slice(-2);
 
         console.log(this.getYymmdd(new Date()));
+
 
         this.state = {
             message: "nothing",
@@ -59,7 +60,45 @@ class OrderList extends Component {
         return (
             <div className="App">
                 <Grid>
-                    준비중 '송장용' 메뉴를 이용해주세요
+                    <Row className="show-grid">
+                        <Panel>
+                            <Col xs={12} md={3}>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.startDateTime}
+                                    placeholder="시작날짜"
+                                    onChange={(e) => this.handleChangeStartDatetime(e)}
+                                />
+                            </Col>
+                            <Col xs={12} md={3}>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.endDateTime}
+                                    placeholder="끝날짜"
+                                    onChange={(e) => this.handleChangeEndDatetime(e)}
+                                />
+                            </Col>
+                            <Col xs={2} md={3} >
+
+                                <FormControl onChange={(event)=>this.handleChangeSelectedTime(event)} componentClass="select" placeholder="select">
+                                    <option value="00:00:00~06:00:00">00:00:00~06:00:00</option>
+                                    <option value="06:00:01~12:00:00">06:00:01~12:00:00</option>
+                                    <option value="12:00:01~18:00:00">12:00:01~18:00:00</option>
+                                    <option value="18:00:01~24:00:00">18:00:01~24:00:00</option>
+                                </FormControl>
+                            </Col>
+                            <Col xs={2} md={2} >
+                                <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
+                            </Col>
+
+                        </Panel>
+                    </Row>
+                    <Row className="show-grid">
+                        <Panel>
+                            <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
+                            {this.state.resultData.length == 0 ? <Progress/> : <ResultTable data={mappedList}/>}
+                        </Panel>
+                    </Row>
                 </Grid>
             </div>
         );
@@ -76,11 +115,11 @@ class OrderList extends Component {
                 , "end_datetime": endDatetime
             }
         })
-        .then((response) => {
-            console.log(response);
-            let ar = response['data']['list'];
-            this.setState({"resultData": ar});
-        });
+            .then((response) => {
+                console.log(response);
+                let ar = response['data']['list'];
+                this.setState({"resultData": ar});
+            });
     }
 
     ajaxCall() {
@@ -88,12 +127,26 @@ class OrderList extends Component {
         axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
             params: {}
         })
-        .then((response) => {
-            console.log(response);
-            let map = response['data'];
-            this.setState({"ownProductMap": map});
-        });
+            .then((response) => {
+                console.log(response);
+                let map = response['data'];
+                this.setState({"ownProductMap": map});
+            });
 
+    }
+
+    handleChangeSelectedTime(event){
+        let ar = event.target.value.split("~");
+
+        let todatYymmdd = this.getYymmdd(new Date());
+        let startDatetime = todatYymmdd + " " + ar[0];
+        let endDatetime = todatYymmdd + " " + ar[1];
+        this.setState({
+            resultData:[]
+            ,startDateTime: startDatetime
+            ,endDateTime: endDatetime
+        });
+        this.callOrderList(startDatetime, endDatetime);
     }
 
     handleDawnTime() {
@@ -145,10 +198,6 @@ class OrderList extends Component {
 
     }
 
-
-
-
-
 }
 
-export default OrderList;
+export default InvoiceList;
