@@ -29,9 +29,24 @@ class ResultTable extends Component {
                     <th>pic_tel_no</th>
                     <th>pic_fax_no</th>
                     <th>PP/CC</th>
-                    <th>product_code</th>
+                    <th>remark</th>
+                    <th>usrext1</th>
+                    <th>usrext2</th>
+                    <th>usrext3</th>
                     <th>item_code</th>
-                    <th>own_item_code</th>
+                    <th>cargo_condition</th>
+                    <th>qty</th>
+                    <th>g.wt</th>
+                    <th>n.wt</th>
+                    <th>wt_unit</th>
+                    <th>volume</th>
+                    <th>volume_unit</th>
+                    <th>production_date</th>
+                    <th>effective_date</th>
+                    <th>po_no</th>
+                    <th>invoice_no</th>
+                    <th>lot_no</th>
+                    <th>remark</th>
                 </tr>
 
                 </thead>
@@ -62,10 +77,24 @@ class TrRow extends Component {
                 <td>{this.props.row['ship_mobile']}</td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
                 <td>{this.props.row['product_code']}</td>
-                <td>{this.props.row['item_code']}</td>
                 <td>{this.props.row['own_item_code']}</td>
-
+                <td>{this.props.row['item_code']}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         )
     }
