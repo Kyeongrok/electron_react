@@ -144,12 +144,12 @@ class AdminForm extends Component{
     }
 
     insertCall(host1){
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/insert?id=" + this.state.row['id'] + "&code="
-            + this.state.row['code'] + "&itemCod=" + this.state.row['ownItemCode']+ "&name=" + this.state.row['name']+ "&price=" + this.state.row['price']
-            + "&originCost=" + this.state.row['originCost'] + "&description=" + this.state.row['description']
-            + "&item_code=" + this.state.row['item_code'] + "&quentity=" + this.state.row['quentity'], {
+        axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id'] + "&code="
+            + this.state.row['code'] + "&name=" + this.state.row['name'] + "&itemCode=" + this.state.row['ItemCode']
+            + "&ownItemCode=" + this.state.row['ownItemCode'] + "&price=" + this.state.row['price']
+            + "&originCost=" + this.state.row['originCost'] +  "&quentity=" + this.state.row['quentity']
+            + "&description=" + this.state.row['description'], {
             params: {
-                //"own_item_code":this.state.row['own_item_code']
             }
 
         })
