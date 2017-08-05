@@ -53,8 +53,8 @@ class AdminTable extends Component {
                                 <th>Id</th>
                                 <th>Code</th>
                                 <th>Name</th>
-                                <th>Item_Code</th>
-                                <th>own_Item_Code</th>
+                                <th>ItemCode</th>
+                                <th>OwnItemCode</th>
                                 <th>Price</th>
                                 <th>Origin_Cost</th>
                                 <th>Quentity</th>
