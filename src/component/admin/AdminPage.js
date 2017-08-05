@@ -124,9 +124,10 @@ class TrRow extends Component {
 
     handleDeleteButton(id) {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/product/delete?id=" + id, {
+        axios.delete("http://" + host1 + ":8092/aprilskin/v1/product/delete?id=" + id, {
             params: {}
         })
+
             .then((response) => {
                 console.log(response);
                 let map = response['data'];
