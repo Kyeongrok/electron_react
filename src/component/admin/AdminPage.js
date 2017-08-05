@@ -5,7 +5,7 @@ import Progress from '../../common/component/Progress';
 
 import AdminForm from './AdminForm';
 
-class AdminPage extends Component {
+class AdminTable extends Component {
     constructor() {
         super();
         this.state = {
@@ -52,9 +52,13 @@ class AdminPage extends Component {
                             <tr>
                                 <th>Id</th>
                                 <th>Code</th>
+                                <th>Name</th>
                                 <th>Item_Code</th>
                                 <th>own_Item_Code</th>
+                                <th>Price</th>
+                                <th>Origin_Cost</th>
                                 <th>Quentity</th>
+                                <th>Description</th>
                                 <th>수정 및 삭제</th>
                             </tr>
                             </thead>
@@ -82,7 +86,7 @@ class AdminPage extends Component {
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/product", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list", {
             params: {}
         })
             .then((response) => {
@@ -99,9 +103,13 @@ class TrRow extends Component {
             <tr>
                 <td>{this.props.row['id']}</td>
                 <td>{this.props.row['code']}</td>
-                <td>{this.props.row['item_code']}</td>
-                <td>{this.props.row['own_item_code']}</td>
+                <td>{this.props.row['name']}</td>
+                <td>{this.props.row['itemCode']}</td>
+                <td>{this.props.row['ownItemCode']}</td>
+                <td>{this.props.row['price']}</td>
+                <td>{this.props.row['originCost']}</td>
                 <td>{this.props.row['quentity']}</td>
+                <td>{this.props.row['description']}</td>
                 <td>
                     <button onClick={() => this.handleClickModifyButton()}>수정</button>
                     <button onClick={() => this.handleDeleteButton(this.props.row['id'])}>삭제</button>
@@ -130,4 +138,4 @@ class TrRow extends Component {
 }
 
 
-export default AdminPage;
+export default AdminTable;

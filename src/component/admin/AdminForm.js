@@ -10,7 +10,8 @@ class AdminForm extends Component{
         super();
         this.state = {
             mode:"off",
-            row:{"id": "", "code":"", "item_code":"", "own_item_code":"", "quentity":""},
+            row:{"id": "", "code":"","name":"", "item_code":"", "own_item_code":"","price":"","origin_Cost":"",
+                "quentity":"","Description":""},
             resultDataSecond : []
         };
     }
@@ -63,6 +64,15 @@ class AdminForm extends Component{
                                     onChange={(event)=>this.handleChangeFieldValue(event, "code")}
                                 />
 
+                                <ControlLabel>name</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['name']}
+                                    placeholder="name"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "name")}
+                                />
+
+
                                 <ControlLabel>item_code</ControlLabel>
                                 <FormControl
                                     type="text"
@@ -79,6 +89,22 @@ class AdminForm extends Component{
                                     onChange={(event)=>this.handleChangeFieldValue(event, "own_item_code")}
                                 />
 
+                                <ControlLabel>price</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['price']}
+                                    placeholder="price"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "price")}
+                                />
+
+                                <ControlLabel>originCost</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['originCost']}
+                                    placeholder="originCost"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "originCost")}
+                                />
+
                                 <ControlLabel>quentity</ControlLabel>
                                 <FormControl
                                     type="text"
@@ -86,6 +112,15 @@ class AdminForm extends Component{
                                     placeholder="quentity"
                                     onChange={(event)=>this.handleChangeFieldValue(event, "quentity")}
                                 />
+
+                                <ControlLabel>description</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['description']}
+                                    placeholder="description"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "description")}
+                                />
+
 
                                 <Button onClick={()=>this.handleClickButton()}>{headerText}</Button>
                             </FormGroup>

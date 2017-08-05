@@ -78,7 +78,7 @@ class OrderList extends Component {
         })
         .then((response) => {
             console.log(response);
-            let ar = response//['data']['list'];
+            let ar = response['data']['list'];
             this.setState({"resultData": ar});
         });
     }
@@ -90,7 +90,7 @@ class OrderList extends Component {
         })
         .then((response) => {
             console.log(response);
-            let map = response//['data'];
+            let map = response['data'];
             this.setState({"ownProductMap": map});
         });
 
