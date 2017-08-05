@@ -5,7 +5,7 @@ import Progress from '../../common/component/Progress';
 
 import AdminForm from './AdminForm';
 
-class AdminTable extends Component {
+class AdminPage extends Component {
     constructor() {
         super();
         this.state = {
@@ -82,7 +82,7 @@ class AdminTable extends Component {
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product", {
             params: {}
         })
             .then((response) => {
@@ -116,7 +116,7 @@ class TrRow extends Component {
 
     handleDeleteButton(id) {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/product/delete?id=" + id, {
+        axios.get("http://" + host1 + ":8092/aprilskin/product/delete?id=" + id, {
             params: {}
         })
             .then((response) => {
@@ -130,4 +130,4 @@ class TrRow extends Component {
 }
 
 
-export default AdminTable;
+export default AdminPage;

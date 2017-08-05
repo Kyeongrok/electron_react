@@ -109,7 +109,7 @@ class AdminForm extends Component{
     }
 
     insertCall(host1){
-        axios.get("http://" + host1 + ":9000/cafe24/product/insert?id=" + this.state.row['id'] + "&code="
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/insert?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
             params: {
@@ -125,7 +125,7 @@ class AdminForm extends Component{
     }
 
     modifyCall(host1) {
-        axios.get("http://" + host1 + ":9000/cafe24/product/modify?id=" + this.state.row['id'] + "&code="
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&item_code=" + this.state.row['item_code'] + "&quentity="
             + this.state.row['quentity'], {
             params: {

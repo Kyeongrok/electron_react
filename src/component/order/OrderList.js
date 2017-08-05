@@ -70,7 +70,7 @@ class OrderList extends Component {
 
     callOrderList(startDatetime, endDatetime){
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/list", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/", {
             params: {
                 "start_datetime": startDatetime
                 , "end_datetime": endDatetime
@@ -78,19 +78,19 @@ class OrderList extends Component {
         })
         .then((response) => {
             console.log(response);
-            let ar = response['data']['list'];
+            let ar = response//['data']['list'];
             this.setState({"resultData": ar});
         });
     }
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/", {
             params: {}
         })
         .then((response) => {
             console.log(response);
-            let map = response['data'];
+            let map = response//['data'];
             this.setState({"ownProductMap": map});
         });
 

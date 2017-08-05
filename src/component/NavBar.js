@@ -32,7 +32,7 @@ class NavBar extends React.Component{
                     </NavDropdown>
 
                     
-                    <LinkContainer to="/adminTable">
+                    <LinkContainer to="/adminPage">
                         <NavItem eventKey={1}>관리자</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/dashboard">
