@@ -25,7 +25,7 @@ class NavBar extends React.Component{
                         <LinkContainer to="/invoiceList">
                             <MenuItem eventKey={4.1}>송장용</MenuItem>
                         </LinkContainer>
-                        <LinkContainer to="/orderList">
+                        <LinkContainer to="/orderList">      // 17.08.06  수정    원래 "/orderList" 였음
                             <MenuItem eventKey={4.2}>주문조회</MenuItem>
                         </LinkContainer>
 

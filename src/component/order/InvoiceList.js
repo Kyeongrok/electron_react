@@ -37,7 +37,7 @@ class InvoiceList extends Component {
     }
     componentWillMount() {
         this.ajaxCall();
-        this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
+        //this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
     }
     handleChangeStartDatetime(event) {
         this.setState({"startDateTime": event.target.value});
@@ -49,12 +49,12 @@ class InvoiceList extends Component {
         //if (this.state.ownProductMap.length === 0) return false;
         let mappedList = [];
         for (let item of this.state.resultData) {
-            let key = item['product_code'] + "-" + item['item_code'];
+            /* let key = item['product_code'] + "-" + item['itemCode'];
             let product = this.state.ownProductMap[key];
             try {
-                item['own_item_code'] = product['own_item_code'];
+                item['ownItemCode'] = product['order_no'];   //product 안에 ownItemCode
             } catch (e) {
-            }
+            }*/
             mappedList.push(item);
         }
         return (
@@ -106,13 +106,13 @@ class InvoiceList extends Component {
     handleClickSearchButton() {
         this.ajaxCall();
     }
-
+/*
     callOrderList(startDatetime, endDatetime){
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/list", {
+        axios.get("http://" + host1 + "8092/aprilskin/v1/order/list", {
             params: {
-                "start_datetime": startDatetime
-                , "end_datetime": endDatetime
+                "startDateTime": startDatetime
+                , "endDateTime": endDatetime
             }
         })
             .then((response) => {
@@ -120,17 +120,17 @@ class InvoiceList extends Component {
                 let ar = response['data']['list'];
                 this.setState({"resultData": ar});
             });
-    }
+    }*/
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":9000/cafe24/product/list/", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
             params: {}
         })
             .then((response) => {
                 console.log(response);
                 let map = response['data'];
-                this.setState({"ownProductMap": map});
+                this.setState({"resultData": map});   //ownProductMap 들어갈 수 있는 자리
             });
 
     }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 require("../css/progress.css");
 
-var Progress = React.createClass({
-    render : function() {
+class Progress extends Component {
+    render() {
         return (
             <div className="loading-container">
                 <div className="loading"></div>
@@ -10,6 +10,6 @@ var Progress = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Progress;

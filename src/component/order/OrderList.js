@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
 import ResultTable from './OrderResultTable';
 import axios from 'axios';
-import Progress from '../../common/component/Progress';
 
 class OrderList extends Component {
     constructor() {
@@ -70,10 +69,10 @@ class OrderList extends Component {
 
     callOrderList(startDatetime, endDatetime){
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
             params: {
-                "start_datetime": startDatetime
-                , "end_datetime": endDatetime
+                "startDateTime": startDatetime
+                , "endDateTime": endDatetime
             }
         })
         .then((response) => {
@@ -85,7 +84,7 @@ class OrderList extends Component {
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list/", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
             params: {}
         })
         .then((response) => {

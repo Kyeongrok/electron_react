@@ -4,12 +4,11 @@ import {Table, Row, Col} from 'react-bootstrap';
 class ResultTable extends Component {
     render(){
         // console.log(this.props.data);
-        let list2 = [
-        ]
+        let list2 = []
 
         let result = this.props.data;
         for(let element of result){
-            list2.push(<TrRow key={element.order_no + element.product_code + element.item_code} row={element} />)
+            list2.push(<TrRow key={element.order_no} row={element} />)
         }
         return (
             <Table className="product_table" striped bordered condensed hover responsive>
