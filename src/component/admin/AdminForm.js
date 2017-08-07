@@ -10,8 +10,7 @@ class AdminForm extends Component{
         super();
         this.state = {
             mode:"off",
-            row:{"id": "", "code":"","name":"", "itemCode":"", "ownItemCode":"","price":"","origin_Cost":"",
-                "quentity":"","Description":""},
+            row:{"id": "", "code":"","name":"", "itemCode":"", "ownItemCode":"","orderItemQty":"","productCode":""},
             resultDataSecond : []
         };
     }
@@ -89,37 +88,23 @@ class AdminForm extends Component{
                                     onChange={(event)=>this.handleChangeFieldValue(event, "ownItemCode")}
                                 />
 
-                                <ControlLabel>price</ControlLabel>
+                                <ControlLabel>orderItemQty</ControlLabel>
                                 <FormControl
                                     type="text"
-                                    value={this.state.row['price']}
-                                    placeholder="price"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "price")}
+                                    value={this.state.row['orderItemQty']}
+                                    placeholder="orderItemQty"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "orderItemQty")}
                                 />
 
-                                <ControlLabel>originCost</ControlLabel>
+                                <ControlLabel>productCode</ControlLabel>
                                 <FormControl
                                     type="text"
-                                    value={this.state.row['originCost']}
-                                    placeholder="originCost"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "originCost")}
+                                    value={this.state.row['productCode']}
+                                    placeholder="productCode"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "productCode")}
                                 />
 
-                                <ControlLabel>quentity</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.row['quentity']}
-                                    placeholder="quentity"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "quentity")}
-                                />
 
-                                <ControlLabel>description</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.row['description']}
-                                    placeholder="description"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "description")}
-                                />
 
 
                                 <Button onClick={()=>this.handleClickButton()}>{headerText}</Button>
@@ -146,9 +131,8 @@ class AdminForm extends Component{
     insertCall(host1){
         axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&name=" + this.state.row['name'] + "&itemCode=" + this.state.row['itemCode']
-            + "&ownItemCode=" + this.state.row['ownItemCode'] + "&price=" + this.state.row['price']
-            + "&originCost=" + this.state.row['originCost'] +  "&quentity=" + this.state.row['quentity']
-            + "&description=" + this.state.row['description'], {
+            + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
+            + "&productCode=" + this.state.row['productCode'], {
             params: {
             }
 
@@ -163,9 +147,8 @@ class AdminForm extends Component{
     modifyCall(host1) {
         axios.put("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id'] + "&code="
             + this.state.row['code'] + "&name=" + this.state.row['name'] + "&itemCode=" + this.state.row['itemCode']
-            + "&ownItemCode=" + this.state.row['ownItemCode'] + "&price=" + this.state.row['price']
-            + "&originCost=" + this.state.row['originCost'] +  "&quentity=" + this.state.row['quentity']
-            + "&description=" + this.state.row['description'], {
+            + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
+            + "&productCode=" + this.state.row['productCode'], {
             params: {
             }
 

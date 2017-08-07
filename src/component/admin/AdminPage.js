@@ -55,10 +55,8 @@ class AdminTable extends Component {
                                 <th>Name</th>
                                 <th>ItemCode</th>
                                 <th>OwnItemCode</th>
-                                <th>Price</th>
-                                <th>Origin_Cost</th>
-                                <th>Quentity</th>
-                                <th>Description</th>
+                                <th>orderItemQty</th>
+                                <th>productCode</th>
                                 <th>수정 및 삭제</th>
                             </tr>
                             </thead>
@@ -106,10 +104,8 @@ class TrRow extends Component {
                 <td>{this.props.row['name']}</td>
                 <td>{this.props.row['itemCode']}</td>
                 <td>{this.props.row['ownItemCode']}</td>
-                <td>{this.props.row['price']}</td>
-                <td>{this.props.row['originCost']}</td>
-                <td>{this.props.row['quentity']}</td>
-                <td>{this.props.row['description']}</td>
+                <td>{this.props.row['orderItemQty']}</td>
+                <td>{this.props.row['productCode']}</td>
                 <td>
                     <button onClick={() => this.handleClickModifyButton()}>수정</button>
                     <button onClick={() => this.handleDeleteButton(this.props.row['id'])}>삭제</button>
