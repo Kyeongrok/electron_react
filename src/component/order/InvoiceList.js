@@ -50,12 +50,6 @@ class InvoiceList extends Component {
         let mappedList = [];
         //let mappedListSecond = [];
         for (let item of this.state.resultData) {
-            let key = item['productCode'] + "-" + item['itemCode'];
-            let product = this.state.ownProductMap[key];
-            try {
-                item['ownItemCode'] = product['ownItemCode'];   //product 안에 ownItemCode
-            } catch (e) {
-            }
             mappedList.push(item);
         }
         return (
@@ -124,13 +118,13 @@ class InvoiceList extends Component {
 
     ajaxCall() {
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list", {
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list/all", {
             params: {}
         })
             .then((response) => {
                 console.log(response);
                 let map = response['data'];
-                this.setState({"ownProductMap": map});   //ownProductMap 들어갈 수 있는 자리
+                this.setState({"resultData": map});
             });
 
     }

@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {Table, Row, Col} from 'react-bootstrap';
 
 class ResultTable extends Component {
+    getYymmdd(pDate){
+        let a = (pDate) => pDate.getFullYear() + "-" +
+            ("00" + (pDate.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + pDate.getDate()).slice(-2);
+        return a(pDate);
+    }
     render(){
         // console.log(this.props.data);
         let list2 = []
@@ -10,6 +16,7 @@ class ResultTable extends Component {
         for(let element of result){
             list2.push(<TrRow key={element.order_no} row={element} />)
         }
+
         return (
             <Table className="product_table" striped bordered condensed hover responsive>
                 <thead>
@@ -62,25 +69,25 @@ class TrRow extends Component {
         // console.log(this.props.row);
         return(
             <tr>
+                <td>{this.props.row['id']}</td>
                 <td></td>
-                <td></td>
-                <td>{this.props.row['order_no']}</td>
-                <td>2017-07-17</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{this.props.row['ship_name']}</td>
-                <td>{this.props.row['ship_address1'] + " " +this.props.row['ship_address2'] }</td>
-                <td></td>
-                <td>{this.props.row['ship_mobile']}</td>
+                <td>{this.props.row['no']}</td>
+                <td>{this.props.row['orderDatetime']}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{this.props.row['product_code']}</td>
-                <td>{this.props.row['own_item_code']}</td>
-                <td>{this.props.row['item_code']}</td>
+                <td>{this.props.row['shipName']}</td>
+                <td>{this.props.row['shipAddress']}</td>
+                <td></td>
+                <td>{this.props.row['shipMobile']}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{this.props.row['productCode']}</td>
+                <td>{this.props.row['ownItemCode']}</td>
+                <td>{this.props.row['itemCode']}</td>
                 <td></td>
                 <td></td>
                 <td></td>
