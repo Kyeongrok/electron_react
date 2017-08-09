@@ -34,7 +34,8 @@ class OrderList extends Component {
         return a(pDate);
     }
     componentWillMount() {
-        this.ajaxCall();
+        //this.ajaxCall();
+
         this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
     }
     handleChangeStartDatetime(event) {
@@ -64,7 +65,7 @@ class OrderList extends Component {
         );
     }
     handleClickSearchButton() {
-        this.ajaxCall();
+        //this.ajaxCall();
     }
 
     callOrderList(startDatetime, endDatetime){
@@ -82,18 +83,7 @@ class OrderList extends Component {
         });
     }
 
-    ajaxCall() {
-        let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
-            params: {}
-        })
-        .then((response) => {
-            console.log(response);
-            let map = response['data'];
-            this.setState({"ownProductMap": map});
-        });
 
-    }
 
     handleDawnTime() {
         let todatYymmdd = this.getYymmdd(new Date());
