@@ -36,7 +36,7 @@ class InvoiceList extends Component {
         return a(pDate);
     }
     componentWillMount() {
-        this.ajaxCall();
+        // this.ajaxCall();
         this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
     }
     handleChangeStartDatetime(event) {
@@ -104,18 +104,20 @@ class InvoiceList extends Component {
 
     callOrderList(startDatetime, endDatetime){
         let host1 = window.location.hostname;
-        axios.get("http://" + host1 + "8092/aprilskin/v1/order/list?startDatetime=" + startDatetime
-            + "&endDateTime=" + endDatetime, {
-            params: {}
+        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
+            params: {
+                "startDateTime": startDatetime,
+                "endDateTime": endDatetime
+            }
 
         })
             .then((response) => {
                 console.log(response);
-                let ar = response['data']['list'];
+                let ar = response['data']['orderList'];
                 this.setState({"resultData": ar});
             });
     }
-
+/*
     ajaxCall() {
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list/all", {
@@ -128,7 +130,7 @@ class InvoiceList extends Component {
             });
 
     }
-
+*/
     handleChangeSelectedTime(event){
         let ar = event.target.value.split("~");
 
