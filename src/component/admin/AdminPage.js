@@ -51,8 +51,7 @@ class AdminTable extends Component {
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Code</th>
-                                <th>Name</th>
+                                <th>ProductName</th>
                                 <th>ItemCode</th>
                                 <th>OwnItemCode</th>
                                 <th>orderItemQty</th>
@@ -100,8 +99,7 @@ class TrRow extends Component {
         return (
             <tr>
                 <td>{this.props.row['id']}</td>
-                <td>{this.props.row['code']}</td>
-                <td>{this.props.row['name']}</td>
+                <td>{this.props.row['productName']}</td>
                 <td>{this.props.row['itemCode']}</td>
                 <td>{this.props.row['ownItemCode']}</td>
                 <td>{this.props.row['orderItemQty']}</td>

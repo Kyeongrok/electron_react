@@ -10,7 +10,7 @@ class AdminForm extends Component{
         super();
         this.state = {
             mode:"off",
-            row:{"id": "", "code":"","name":"", "itemCode":"", "ownItemCode":"","orderItemQty":"","productCode":""},
+            row:{"id": "","productName":"", "itemCode":"", "ownItemCode":"","orderItemQty":"","productCode":""},
             resultDataSecond : []
         };
     }
@@ -55,21 +55,15 @@ class AdminForm extends Component{
                                     onChange={(event)=> this.handleChangeFieldValue(event, "id")}
                                 />
 
-                                <ControlLabel>code</ControlLabel>
+
+                                <ControlLabel>ProductName</ControlLabel>
                                 <FormControl
                                     type="text"
-                                    value={this.state.row['code']}
-                                    placeholder="code"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "code")}
+                                    value={this.state.row['productName']}
+                                    placeholder="productName"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "productName")}
                                 />
 
-                                <ControlLabel>name</ControlLabel>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.row['name']}
-                                    placeholder="name"
-                                    onChange={(event)=>this.handleChangeFieldValue(event, "name")}
-                                />
 
 
                                 <ControlLabel>itemCode</ControlLabel>
@@ -129,8 +123,8 @@ class AdminForm extends Component{
     }
 
     insertCall(host1){
-        axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id'] + "&code="
-            + this.state.row['code'] + "&name=" + this.state.row['name'] + "&itemCode=" + this.state.row['itemCode']
+        axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id']
+            + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
             + "&productCode=" + this.state.row['productCode'], {
             params: {
@@ -145,8 +139,8 @@ class AdminForm extends Component{
     }
 
     modifyCall(host1) {
-        axios.put("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id'] + "&code="
-            + this.state.row['code'] + "&name=" + this.state.row['name'] + "&itemCode=" + this.state.row['itemCode']
+        axios.put("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id']
+            + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
             + "&productCode=" + this.state.row['productCode'], {
             params: {
