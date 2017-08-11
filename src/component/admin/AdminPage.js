@@ -35,7 +35,7 @@ class AdminTable extends Component {
         }
 
         for (let element of mappedList) {
-            list3.push(<TrRow key={element.id + element.code} row={element}
+            list3.push(<TrRow key={element.id + element.itemCode} row={element}
                               callbackModify={(row) => this.callbackModify(row)}/>)
         }
         return (
