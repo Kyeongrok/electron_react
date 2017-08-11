@@ -99,7 +99,7 @@ class InvoiceList extends Component {
         );
     }
     handleClickSearchButton() {
-        //this.ajaxCall();
+        this.callOrderList();
     }
 
     callOrderList(startDatetime, endDatetime){
@@ -113,7 +113,7 @@ class InvoiceList extends Component {
         })
             .then((response) => {
                 console.log(response);
-                let ar = response['data']['orderList'];//['orderProductDtoList']
+                let ar = response['data']['orderProductDtoList']
                 this.setState({"resultData": ar});
             });
     }
