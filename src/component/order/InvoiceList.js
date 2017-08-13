@@ -3,6 +3,7 @@ import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from '
 import ResultTable from './OrderResultTable';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
+import Pagination from '../../common/component/Pagination';
 
 class InvoiceList extends Component {
     constructor() {

@@ -14,7 +14,7 @@ class ResultTable extends Component {
 
         let result = this.props.data;
         for(let element of result){
-            list2.push(<TrRow key={element.order_no} row={element} />)
+            list2.push(<TrRow key={element.no} row={element} />)
         }
 
         return (

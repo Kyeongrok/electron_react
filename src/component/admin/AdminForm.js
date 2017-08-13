@@ -4,16 +4,24 @@
 import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import axios from 'axios';
+import Pagination from 'react-js-pagination';
 
 class AdminForm extends Component{
     constructor() {
         super();
         this.state = {
             mode:"off",
-            row:{"id": "","productName":"", "itemCode":"", "ownItemCode":"","orderItemQty":"","productCode":""},
-            resultDataSecond : []
+            row:{"id": "","productName":"", "itemCode":"", "ownItemCode":"","orderItemQty":"","productCode":"","price":""},
+            resultDataSecond : [],
+            activePage: 1
         };
     }
+
+    handlePageChange(pageNumber) {
+        //console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber});
+    }
+
     handleChangeFieldValue(event, sFieldName){
         let row = this.state.row;
         row[sFieldName] = event.target.value;
@@ -65,7 +73,6 @@ class AdminForm extends Component{
                                 />
 
 
-
                                 <ControlLabel>itemCode</ControlLabel>
                                 <FormControl
                                     type="text"
@@ -98,8 +105,13 @@ class AdminForm extends Component{
                                     onChange={(event)=>this.handleChangeFieldValue(event, "productCode")}
                                 />
 
-
-
+                                <ControlLabel>price</ControlLabel>
+                                <FormControl
+                                    type="text"
+                                    value={this.state.row['price']}
+                                    placeholder="price"
+                                    onChange={(event)=>this.handleChangeFieldValue(event, "price")}
+                                />
 
                                 <Button onClick={()=>this.handleClickButton()}>{headerText}</Button>
                             </FormGroup>
@@ -126,7 +138,7 @@ class AdminForm extends Component{
         axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id']
             + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
-            + "&productCode=" + this.state.row['productCode'], {
+            + "&productCode=" + this.state.row['productCode'] + "&price=" + this.state.row['price'], {
             params: {
             }
 
@@ -142,7 +154,7 @@ class AdminForm extends Component{
         axios.put("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id']
             + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
-            + "&productCode=" + this.state.row['productCode'], {
+            + "&productCode=" + this.state.row['productCode'] + "&price=" + this.state.row['price'], {
             params: {
             }
 

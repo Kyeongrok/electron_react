@@ -2,22 +2,47 @@ import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import Pagination from '../../common/component/Pagination';
+import _ from 'lodash';
+//import Pagination from 'react-js-pagination';
 
 import AdminForm from './AdminForm';
 
 class AdminTable extends Component {
     constructor() {
         super();
+            /*
+        var exampleItems = _.range(1,1000).map(i=> {return {id:i, productName : productName , itemCode: itemCode,
+                                                            orderItemQty: orderItemQty, ownItemCode: ownItemCode,
+                                                            productCode: productCode, price : price};
+                                                    });*/
+
         this.state = {
             resultDataSecond: [],
             selectedRow: null,
             subMenuMode: "off",
-            ajaxComplete:false
+            ajaxComplete:false,
+            activePage: 1,
+            pageOfItems : [],
+            totalItems: [],
+            //exampleItems: exampleItems
         };
+
+        this.onChangePage = this.onChangePage.bind(this);
     }
 
     componentWillMount() {
         this.ajaxCall();
+    }
+
+    onChangePage(pageOfItems){
+        this.setState({pageOfItems: pageOfItems});
+    }
+
+    handlePageChange(pageNumber) {
+        //console.log(`active page is ${pageNumber}`);
+        this.setState({activePage: pageNumber});
     }
 
     render() {
@@ -30,16 +55,19 @@ class AdminTable extends Component {
         //console.log(this.state.result);
         console.log("hi");
         let mappedList = [];
+
         for (let item of this.state.resultDataSecond) {
             mappedList.push(item);
         }
-
         for (let element of mappedList) {
             list3.push(<TrRow key={element.id + element.itemCode} row={element}
                               callbackModify={(row) => this.callbackModify(row)}/>)
         }
+        this.state.totalItems =list3;
+        //console.log("here"+list3.length);
+        //this.state.exampleItems = list3;
         return (
-            <Panel>
+                <Panel>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <Button bsStyle="primary" onClick={() => this.handleClickInsert()}>삽입</Button>
@@ -54,20 +82,30 @@ class AdminTable extends Component {
                                 <th>ProductName</th>
                                 <th>ItemCode</th>
                                 <th>OwnItemCode</th>
-                                <th>orderItemQty</th>
-                                <th>productCode</th>
+                                <th>OrderItemQty</th>
+                                <th>ProductCode</th>
+                                <th>Price</th>
                                 <th>수정 및 삭제</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {list3}
+                            {this.state.pageOfItems.map(item => <tr>
+                                <td>{item}</td>
+                                <td>{item.productName}</td>
+                                <td>{item.itemCode}</td>
+                                <td>{item.ownItemCode}</td>
+                                <td>{item.orderItemQty}</td>
+                                <td>{item.productCode}</td>
+                                <td>{item.price}</td>
+                            </tr>)}
+                            <Pagination items={this.state.totalItems} onChangePage={this.onChangePage} />
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
                 <AdminForm row={this.state.selectedRow} mode={this.state.subMenuMode}/>
                 {list3.length == 0 ? <Progress/> : null}
-            </Panel>
+                </Panel>
 
         );
     }
@@ -104,6 +142,7 @@ class TrRow extends Component {
                 <td>{this.props.row['ownItemCode']}</td>
                 <td>{this.props.row['orderItemQty']}</td>
                 <td>{this.props.row['productCode']}</td>
+                <td>{this.props.row['price']}</td>
                 <td>
                     <button onClick={() => this.handleClickModifyButton()}>수정</button>
                     <button onClick={() => this.handleDeleteButton(this.props.row['id'])}>삭제</button>
