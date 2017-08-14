@@ -19,7 +19,7 @@ class AdminTable extends Component {
             ajaxComplete:false,
             activePage: 1,
             totalItems: [],
-            itemsCountPerPage:20
+            itemsCountPerPage:15
         };
 
         this.onChangePage = this.onChangePage.bind(this);
@@ -51,12 +51,14 @@ class AdminTable extends Component {
         console.log(this.state.activePage);
         console.log(this.state.itemsCountPerPage);
 
-        let startNumber = this.state.activePage * this.state.itemsCountPerPage - 20;
+        let startNumber = this.state.activePage * this.state.itemsCountPerPage - this.state.itemsCountPerPage;
         let endNumber = this.state.activePage * this.state.itemsCountPerPage - 1;
 
         for(let i = startNumber ; i < endNumber ; i++){
-            console.log(this.state.resultDataSecond[i]);
-            mappedList.push(this.state.resultDataSecond[i]);
+            if(this.state.resultDataSecond[i] != null){
+                mappedList.push(this.state.resultDataSecond[i]);
+            }
+
         }
 
         if(mappedList == null) return false;
