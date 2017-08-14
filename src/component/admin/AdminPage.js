@@ -34,10 +34,6 @@ class AdminTable extends Component {
         this.setState({activePage: pageNumber});
     }
 
-    handlePageChange(pageNumber) {
-        //console.log(`active page is ${pageNumber}`);
-        this.setState({activePage: pageNumber});
-    }
 
     render() {
         if(this.state.resultDataSecond == null || this.state.resultDataSecond.length === 0) return false;

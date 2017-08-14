@@ -87,7 +87,7 @@ class TrRow extends Component {
                 <td>{this.props.row['productCode']}</td>
                 <td>{this.props.row['ownItemCode']}</td>
                 <td>{this.props.row['itemCode']}</td>
-                <td></td>
+                <td>{this.props.row['amountPaid']}</td>
                 <td></td>
                 <td></td>
                 <td></td>
