@@ -100,7 +100,7 @@ class InvoiceList extends Component {
         );
     }
     handleClickSearchButton() {
-        this.callOrderList();
+        this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
     }
 
     callOrderList(startDatetime, endDatetime){
