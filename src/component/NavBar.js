@@ -2,7 +2,6 @@
  * Created by kyeongrok.kim on 2017-07-19.
  */
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import {NavDropdown,MenuItem,Navbar,Nav, NavItem} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 

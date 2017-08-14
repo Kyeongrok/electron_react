@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
+import {Table, Panel} from 'react-bootstrap';
 
 class Dashboard extends Component {
     constructor() {

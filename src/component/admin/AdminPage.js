@@ -2,31 +2,24 @@ import React, {Component} from 'react';
 import {Table, Row, Col, Panel, Button} from 'react-bootstrap';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import Pagination from '../../common/component/Pagination';
-import _ from 'lodash';
-//import Pagination from 'react-js-pagination';
+// import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+// import Pagination from '../../common/component/Pagination';
+// import _ from 'lodash';
+import Pagination from 'react-js-pagination';
 
 import AdminForm from './AdminForm';
 
 class AdminTable extends Component {
     constructor() {
         super();
-            /*
-        var exampleItems = _.range(1,1000).map(i=> {return {id:i, productName : productName , itemCode: itemCode,
-                                                            orderItemQty: orderItemQty, ownItemCode: ownItemCode,
-                                                            productCode: productCode, price : price};
-                                                    });*/
-
         this.state = {
             resultDataSecond: [],
             selectedRow: null,
             subMenuMode: "off",
             ajaxComplete:false,
             activePage: 1,
-            pageOfItems : [],
             totalItems: [],
-            //exampleItems: exampleItems
+            itemsCountPerPage:20
         };
 
         this.onChangePage = this.onChangePage.bind(this);
@@ -36,8 +29,9 @@ class AdminTable extends Component {
         this.ajaxCall();
     }
 
-    onChangePage(pageOfItems){
-        this.setState({pageOfItems: pageOfItems});
+    onChangePage(pageNumber){
+        console.log(pageNumber);
+        this.setState({activePage: pageNumber});
     }
 
     handlePageChange(pageNumber) {
@@ -46,9 +40,7 @@ class AdminTable extends Component {
     }
 
     render() {
-        console.log(this.props.data);
-        let list3 = [];
-
+        if(this.state.resultDataSecond == null || this.state.resultDataSecond.length === 0) return false;
         //let result = this.props.data;
         //console.log("here"+result.length);
 
@@ -56,16 +48,22 @@ class AdminTable extends Component {
         console.log("hi");
         let mappedList = [];
 
-        for (let item of this.state.resultDataSecond) {
-            mappedList.push(item);
+        console.log(this.state.activePage);
+        console.log(this.state.itemsCountPerPage);
+
+        let startNumber = this.state.activePage * this.state.itemsCountPerPage - 20;
+        let endNumber = this.state.activePage * this.state.itemsCountPerPage - 1;
+
+        for(let i = startNumber ; i < endNumber ; i++){
+            console.log(this.state.resultDataSecond[i]);
+            mappedList.push(this.state.resultDataSecond[i]);
         }
-        for (let element of mappedList) {
-            list3.push(<TrRow key={element.id + element.itemCode} row={element}
-                              callbackModify={(row) => this.callbackModify(row)}/>)
-        }
-        this.state.totalItems =list3;
+
+        if(mappedList == null) return false;
+
         //console.log("here"+list3.length);
         //this.state.exampleItems = list3;
+        //console.log(this.state.itemsCountPerPage);
         return (
                 <Panel>
                 <Row className="show-grid">
@@ -89,36 +87,34 @@ class AdminTable extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.state.pageOfItems.map(item => <tr>
-                                <td>{item}</td>
-                                <td>{item.productName}</td>
-                                <td>{item.itemCode}</td>
-                                <td>{item.ownItemCode}</td>
-                                <td>{item.orderItemQty}</td>
-                                <td>{item.productCode}</td>
-                                <td>{item.price}</td>
-                            </tr>)}
-                            <Pagination items={this.state.totalItems} onChangePage={this.onChangePage} />
+                            {mappedList.map(item =>{
+                                return <TrRow row={item}/>
+                            })}
+
                             </tbody>
                         </Table>
+                        <Pagination
+                            activePage={this.state.activePage}
+                            totalItemsCount={this.state.resultDataSecond.length}
+                            onChange={(pageNumber)=>this.onChangePage(pageNumber)}
+                            itemsCountPerPage={this.state.itemsCountPerPage}
+                            pageRangeDisplayed={20}
+                        />
                     </Col>
+
                 </Row>
                 <AdminForm row={this.state.selectedRow} mode={this.state.subMenuMode}/>
-                {list3.length == 0 ? <Progress/> : null}
+                {this.state.resultDataSecond.length === 0 ? <Progress/> : null}
                 </Panel>
-
         );
     }
 
     handleClickInsert() {
-
         this.setState({subMenuMode: "insert"});
     }
-
     callbackModify(row) {
         this.setState({subMenuMode: "modify", selectedRow: row});
     }
-
     ajaxCall() {
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":8092/aprilskin/v1/product/list", {
@@ -133,7 +129,9 @@ class AdminTable extends Component {
 }
 
 class TrRow extends Component {
+
     render() {
+        console.log(this.props.row);
         return (
             <tr>
                 <td>{this.props.row['id']}</td>

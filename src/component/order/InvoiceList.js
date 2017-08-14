@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Button, ButtonToolbar, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
+import {Button, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
 import ResultTable from './OrderResultTable';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
-import Pagination from '../../common/component/Pagination';
+//import Pagination from '../../common/component/Pagination';
 
 class InvoiceList extends Component {
     constructor() {
@@ -92,7 +92,7 @@ class InvoiceList extends Component {
                     <Row className="show-grid">
                         <Panel>
                             <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
-                            {this.state.resultData.length == 0 ? <Progress/> : <ResultTable data={mappedList}/>}
+                            {this.state.resultData.length === 0 ? <Progress/> : <ResultTable data={mappedList}/>}
                         </Panel>
                     </Row>
                 </Grid>

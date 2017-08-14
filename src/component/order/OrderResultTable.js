@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Row, Col} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 
 class ResultTable extends Component {
     getYymmdd(pDate){
@@ -11,7 +11,6 @@ class ResultTable extends Component {
     render(){
         // console.log(this.props.data);
         let list2 = []
-
         let result = this.props.data;
         for(let element of result){
             list2.push(<TrRow key={element.no + element.own_item_code} row={element} />)

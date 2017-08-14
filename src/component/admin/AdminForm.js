@@ -2,9 +2,9 @@
  * Created by Yjw on 2017-07-21.
  */
 import React, {Component} from 'react';
-import {Table, Row, Col, Panel, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import {Row, Col, Panel, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import axios from 'axios';
-import Pagination from 'react-js-pagination';
+// import Pagination from 'react-js-pagination';
 
 class AdminForm extends Component{
     constructor() {
@@ -16,7 +16,6 @@ class AdminForm extends Component{
             activePage: 1
         };
     }
-
     handlePageChange(pageNumber) {
         //console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
@@ -31,16 +30,16 @@ class AdminForm extends Component{
         console.log(this.props.row);
     }
     componentWillReceiveProps(nextProps){
-        if(nextProps['row'] == null) return null;
+        if(nextProps['row'] === null) return null;
         this.setState({row: nextProps['row']});
 
     }
     render() {
         if(this.props.mode === "off") return false;
         let headerText = "수정";
-        if(this.props.mode == "modify") {
+        if(this.props.mode === "modify") {
             headerText = "수정";
-        }else if(this.props.mode == "insert"){
+        }else if(this.props.mode === "insert"){
             headerText = "삽입";
         }
 
@@ -112,7 +111,6 @@ class AdminForm extends Component{
                                     placeholder="price"
                                     onChange={(event)=>this.handleChangeFieldValue(event, "price")}
                                 />
-
                                 <Button onClick={()=>this.handleClickButton()}>{headerText}</Button>
                             </FormGroup>
                         </form>
@@ -122,26 +120,21 @@ class AdminForm extends Component{
         )
     }
 
-
     handleClickButton() {
         let host1 = window.location.hostname;
-        if(this.props.mode == 'insert') {
+        if(this.props.mode === 'insert') {
             this.insertCall(host1);
-        } else if (this.props.mode == 'modify'){
+        } else if (this.props.mode === 'modify'){
             this.modifyCall(host1);
         }
-
         window.location.reload();
     }
-
     insertCall(host1){
         axios.post("http://" + host1 + ":8092/aprilskin/v1/product/insert?id=" + this.state.row['id']
             + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
             + "&productCode=" + this.state.row['productCode'] + "&price=" + this.state.row['price'], {
-            params: {
-            }
-
+            params: {}
         })
             .then((response) => {
                 console.log(response);
@@ -149,22 +142,18 @@ class AdminForm extends Component{
                 this.setState({"resultDataSecond": map});
             });
     }
-
     modifyCall(host1) {
         axios.put("http://" + host1 + ":8092/aprilskin/v1/product/update?id=" + this.state.row['id']
             + "&productName=" + this.state.row['productName'] + "&itemCode=" + this.state.row['itemCode']
             + "&ownItemCode=" + this.state.row['ownItemCode'] + "&orderItemQty=" + this.state.row['orderItemQty']
             + "&productCode=" + this.state.row['productCode'] + "&price=" + this.state.row['price'], {
-            params: {
-            }
-
+            params: {}
         })
             .then((response) => {
                 console.log(response);
                 let map = response['data'];
                 this.setState({"resultDataSecond": map});
             });
-
     }
 
 
