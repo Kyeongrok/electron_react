@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
+import {Button, Panel, Grid, Row, Col, FormControl, Label, Tabs, Tab} from 'react-bootstrap';
 import OrderResultTable from './OrderResultTable';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
@@ -85,10 +85,15 @@ class InvoiceList extends Component {
                         </Panel>
                     </Row>
                     <Row className="show-grid">
-                        <Panel>
-                            <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
-                            {this.state.resultData.length === 0 ? <Progress/> : <OrderResultTable data={mappedList}/>}
-                        </Panel>
+                        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                            <Tab eventKey={1} title="April Skin">
+                                <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
+                                {this.state.resultData.length === 0 ? <Progress/> : <OrderResultTable data={mappedList}/>}
+                            </Tab>
+                            <Tab eventKey={2} title="글램디"><Panel>개발 예정</Panel></Tab>
+                            <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
+                        </Tabs>
+
                     </Row>
                 </Grid>
             </div>
