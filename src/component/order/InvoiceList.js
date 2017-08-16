@@ -23,7 +23,8 @@ class InvoiceList extends Component {
             startDateTime: getYymmdd(beforeD),
             endDateTime: getYymmdd(nowD),
             resultData: [],
-            ownProductMap: []
+            ownProductMap: [],
+            brandName:"aprilskin"
         };
     }
     getYymmdd(pDate){
@@ -84,13 +85,16 @@ class InvoiceList extends Component {
                             </Col>
                         </Panel>
                     </Row>
+
                     <Row className="show-grid">
                         <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                            <Tab eventKey={1} title="April Skin">
+                            <Tab eventKey={1} onEntered={()=>console.log("on entered")} title="April Skin">
                                 <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
                                 {this.state.resultData.length === 0 ? <Progress/> : <OrderResultTable data={mappedList}/>}
                             </Tab>
-                            <Tab eventKey={2} title="글램디"><Panel>개발 예정</Panel></Tab>
+                            <Tab eventKey={2} onEntered={()=>this.setState({brand:"medicube"})} title="글램디">
+                                <Panel>개발 예정</Panel>
+                            </Tab>
                             <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
                         </Tabs>
 
