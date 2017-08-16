@@ -10,10 +10,10 @@ class ResultTable extends Component {
     }
     render(){
         // console.log(this.props.data);
-        let list2 = []
+        let list2 = [];
         let result = this.props.data;
         for(let element of result){
-            list2.push(<TrRow key={element.no + element.own_item_code} row={element} />)
+            list2.push(<TrRow key={element.no + element.own_item_code + Math.random() } row={element} />)
         }
 
         return (
@@ -56,7 +56,7 @@ class ResultTable extends Component {
 
                 </thead>
                 <tbody>
-                    {list2}
+                    {list2.length > 0 ? list2:<tr><td colSpan="27">결과가 없습니다.</td></tr>}
                 </tbody>
             </Table>
         );

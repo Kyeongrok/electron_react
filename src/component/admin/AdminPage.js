@@ -21,29 +21,22 @@ class AdminTable extends Component {
             totalItems: [],
             itemsCountPerPage:15
         };
-
         this.onChangePage = this.onChangePage.bind(this);
     }
-
     componentWillMount() {
         this.ajaxCall();
     }
-
     onChangePage(pageNumber){
         console.log(pageNumber);
         this.setState({activePage: pageNumber});
     }
-
-
     render() {
         if(this.state.resultDataSecond == null || this.state.resultDataSecond.length === 0) return false;
         //let result = this.props.data;
         //console.log("here"+result.length);
-
         //console.log(this.state.result);
         console.log("hi");
         let mappedList = [];
-
         console.log(this.state.activePage);
         console.log(this.state.itemsCountPerPage);
 
@@ -54,11 +47,9 @@ class AdminTable extends Component {
             if(this.state.resultDataSecond[i] != null){
                 mappedList.push(this.state.resultDataSecond[i]);
             }
-
         }
 
         if(mappedList == null) return false;
-
         //console.log("here"+list3.length);
         //this.state.exampleItems = list3;
         //console.log(this.state.itemsCountPerPage);

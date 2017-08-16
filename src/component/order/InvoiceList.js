@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Panel, Grid, Row, Col, FormControl, Label} from 'react-bootstrap';
-import ResultTable from './OrderResultTable';
+import OrderResultTable from './OrderResultTable';
 import axios from 'axios';
 import Progress from '../../common/component/Progress';
-//import Pagination from '../../common/component/Pagination';
 
 class InvoiceList extends Component {
     constructor() {
@@ -18,9 +17,6 @@ class InvoiceList extends Component {
             ("00" + pDate.getHours()).slice(-2) + ":" +
             ("00" + pDate.getMinutes()).slice(-2) + ":" +
             ("00" + pDate.getSeconds()).slice(-2);
-
-        console.log(this.getYymmdd(new Date()));
-
 
         this.state = {
             message: "nothing",
@@ -47,7 +43,7 @@ class InvoiceList extends Component {
         this.setState({"endDateTime": event.target.value});
     }
     render() {
-        //if (this.state.ownProductMap.length === 0) return false;
+        // if (this.state.ownProductMap.length === 0) return false;
         let mappedList = [];
         //let mappedListSecond = [];
         for (let item of this.state.resultData) {
@@ -84,15 +80,14 @@ class InvoiceList extends Component {
                                 </FormControl>
                             </Col>
                             <Col xs={2} md={2} >
-                                <Button bsStyle="primary" onClick={() => this.handleClickSearchButton()}>조회</Button>
+                                <Button bsStyle="primary" onClick={()=>this.handleClickSearchButton()}>조회</Button>
                             </Col>
-
                         </Panel>
                     </Row>
                     <Row className="show-grid">
                         <Panel>
                             <Label bsStyle="default">{"행수:" + this.state.resultData.length}</Label>
-                            {this.state.resultData.length === 0 ? <Progress/> : <ResultTable data={mappedList}/>}
+                            {this.state.resultData.length === 0 ? <Progress/> : <OrderResultTable data={mappedList}/>}
                         </Panel>
                     </Row>
                 </Grid>
@@ -100,7 +95,10 @@ class InvoiceList extends Component {
         );
     }
     handleClickSearchButton() {
+        // console.log(this.state['startDateTime']);
+        this.setState({resultData: []});
         this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
+
     }
 
     callOrderList(startDatetime, endDatetime){
@@ -110,31 +108,16 @@ class InvoiceList extends Component {
                 "startDateTime": startDatetime,
                 "endDateTime": endDatetime
             }
-
         })
-            .then((response) => {
-                console.log(response);
-                let ar = response['data']['orderProductDtoList']
-                this.setState({"resultData": ar});
-            });
+        .then((response) => {
+            console.log(response);
+            let ar = response['data']['orderProductDtoList']
+            this.setState({"resultData": ar});
+        });
     }
-/*
-    ajaxCall() {
-        let host1 = window.location.hostname;
-        axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list/all", {
-            params: {}
-        })
-            .then((response) => {
-                console.log(response);
-                let map = response['data'];
-                this.setState({"resultData": map});
-            });
 
-    }
-*/
     handleChangeSelectedTime(event){
         let ar = event.target.value.split("~");
-
         let todatYymmdd = this.getYymmdd(new Date());
         let startDatetime = todatYymmdd + " " + ar[0];
         let endDatetime = todatYymmdd + " " + ar[1];
@@ -145,56 +128,6 @@ class InvoiceList extends Component {
         });
         this.callOrderList(startDatetime, endDatetime);
     }
-
-    handleDawnTime() {
-        let todatYymmdd = this.getYymmdd(new Date());
-        let startDatetime = todatYymmdd + " " + "00:00:00";
-        let endDatetime = todatYymmdd + " " + "06:00:00";
-        this.setState({
-            resultData:[]
-            ,startDateTime: startDatetime
-            ,endDateTime: endDatetime
-        });
-        this.callOrderList(startDatetime, endDatetime);
-    }
-    handleAmTime() {
-        let todatYymmdd = this.getYymmdd(new Date());
-        let startDatetime = todatYymmdd + " " + "06:00:01";
-        let endDatetime = todatYymmdd + " " + "12:00:00";
-        this.setState({
-            resultData:[]
-            ,startDateTime: startDatetime
-            ,endDateTime: endDatetime
-        });
-        this.callOrderList(startDatetime, endDatetime);
-
-    }
-    handlePmTime() {
-        let todatYymmdd = this.getYymmdd(new Date());
-        let startDatetime = todatYymmdd + " " + "12:00:01";
-        let endDatetime = todatYymmdd + " " + "18:00:00";
-        this.setState({
-            resultData:[]
-            ,startDateTime: startDatetime
-            ,endDateTime: endDatetime
-        });
-        this.callOrderList(startDatetime, endDatetime);
-
-    }
-    handleNightTime(){
-        let todatYymmdd = this.getYymmdd(new Date());
-        let startDatetime = todatYymmdd + " " + "18:00:01";
-        let endDatetime = todatYymmdd + " " + "24:00:00";
-        this.setState({
-            resultData:[]
-            ,startDateTime: startDatetime
-            ,endDateTime: endDatetime
-        });
-        this.callOrderList(startDatetime, endDatetime);
-        // this.ajaxCall();
-
-    }
-
 }
 
 export default InvoiceList;
