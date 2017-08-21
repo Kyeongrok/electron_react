@@ -12,6 +12,16 @@ import InvoiceList from './component/order/InvoiceList';
 import AdminTable from './component/admin/AdminPage';
 import Dashboard from './component/dashboard/Dashboard';
 
+// Redux
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+import thunk from 'redux-thunk';
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
+const rootElement = document.getElementById('root');
+
 class Root extends Component{
     render(){
         return (
@@ -31,6 +41,7 @@ class Root extends Component{
 
 
 ReactDOM.render(
-  <Root />,
-  document.getElementById('root')
+    <Provider store={store}>
+  <Root />
+    </Provider>, rootElement
 );
