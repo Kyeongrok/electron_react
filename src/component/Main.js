@@ -1,8 +1,5 @@
 import React from 'react';
 import {Jumbotron, Button, Fade, Well} from 'react-bootstrap';
-//import Authentication from "./Authentication";
-import Login from "./container/Login";
-import Register from "./container/Register";
 
 class Main extends React.Component {
 
@@ -19,12 +16,6 @@ class Main extends React.Component {
                 <p>
                     <Helper/>
                 </p>
-
-                <div>
-                   <Login/>
-                    <Register/>
-                </div>
-
             </Jumbotron>
         )
 
@@ -54,7 +45,5 @@ class Helper extends React.Component {
         );
     }
 }
-
-
 
 export default Main;
