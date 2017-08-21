@@ -19,15 +19,15 @@ import axios from 'axios';
 let host1 = window.location.hostname;
 
 /* LOGIN */
-export function loginRequest(username, password) {
+export function loginRequest(userId, password) {
     let host1 = window.location.hostname;
     return (dispatch) => {
         dispatch(login());
 
-        return axios.post("http://" + host1 + ":8092/aprilskin/v1/users/login", {username, password})
+        return axios.post("http://" + host1 + ":8092/aprilskin/v1/users/login", {userId, password})
             .then((response) => {
             //성공
-            dispatch(loginSuccess(username));
+            dispatch(loginSuccess(userId));
         }).catch((error)=> {
             //실패
             dispatch(loginFailure());
@@ -74,12 +74,12 @@ export function logout() {
 
 
 /* REGISTER */
-export function registerRequest(username, password) {
+export function registerRequest(userId, password) {
     return (dispatch) => {
         // Inform Register API is starting
         dispatch(register());
 
-        return axios.post("http://" + host1 + ":8092/aprilskin/v1/users/register", { username, password })
+        return axios.post("http://" + host1 + ":8092/aprilskin/v1/users/register", { userId, password })
             .then((response) => {
                 dispatch(registerSuccess());
             }).catch((error) => {
