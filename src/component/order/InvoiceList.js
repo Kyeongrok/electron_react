@@ -24,7 +24,7 @@ class InvoiceList extends Component {
             endDateTime: getYymmdd(nowD),
             resultData: [],
             ownProductMap: [],
-            brandName:"aprilskin"
+            shopType:"1"
         };
     }
     getYymmdd(pDate){
@@ -35,7 +35,7 @@ class InvoiceList extends Component {
     }
     componentWillMount() {
         // this.ajaxCall();
-        this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
+        this.callOrderList(shopType, this.state['startDateTime'], this.state['endDateTime']);
     }
     handleChangeStartDatetime(event) {
         this.setState({"startDateTime": event.target.value});
@@ -106,14 +106,15 @@ class InvoiceList extends Component {
     handleClickSearchButton() {
         // console.log(this.state['startDateTime']);
         this.setState({resultData: []});
-        this.callOrderList(this.state['startDateTime'], this.state['endDateTime']);
+        this.callOrderList(shopType,his.state['startDateTime'], this.state['endDateTime']);
 
     }
 
-    callOrderList(startDatetime, endDatetime){
+    callOrderList(shopType, startDatetime, endDatetime){
         let host1 = window.location.hostname;
         axios.get("http://" + host1 + ":8092/aprilskin/v1/order/list", {
             params: {
+                "shopType" : shopType,
                 "startDateTime": startDatetime,
                 "endDateTime": endDatetime
             }

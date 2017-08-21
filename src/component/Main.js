@@ -83,10 +83,7 @@ class Main extends React.Component {
                 <p>
                     <Helper/>
                 </p>
-                <div>
-                <Login/>
-                <Register/>
-                </div>
+
             </Jumbotron>
         )
 
